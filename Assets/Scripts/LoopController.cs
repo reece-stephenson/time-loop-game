@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LoopController : MonoBehaviour
 {
-
     [SerializeField]
     private int _maxFrames = 6000;
     private int _currentFrame = 0;
@@ -32,9 +31,11 @@ public class LoopController : MonoBehaviour
         {
             _currentFrame++;
         }
-        else {
+        else
+        {
 
             var playerScript = _player.GetComponent<PlayerMovement>();
+
             playerScript.LockMovement = true;
             playerScript.RigidBody.position = _startPosition;
 
@@ -55,6 +56,8 @@ public class LoopController : MonoBehaviour
             playerCopyScript.startPosition = _startPosition;
             playerCopyScript._movements = GetDeepCopy(playerScript._movements);
 
+            playerCopyScript._animations = GetAnimationDeepCopy(playerScript._animations);
+
             playerScript.ResetMovement();
             playerScript.LockMovement = false;
 
@@ -68,9 +71,25 @@ public class LoopController : MonoBehaviour
         var arr = queue.ToArray();
         var ret = new Queue<Vector2>();
 
-        for (int i=0; i<arr.Length; i++)
+        for (int i = 0; i < arr.Length; i++)
         {
             ret.Enqueue(arr[i]);
+        }
+
+        return ret;
+    }
+    private Queue<CommonAnimationState> GetAnimationDeepCopy(Queue<CommonAnimationState> queue)
+    {
+        var arr = queue.ToArray();
+        var ret = new Queue<CommonAnimationState>();
+
+        for (int i = 0; i < arr.Length; i++)
+        {
+            ret.Enqueue(new CommonAnimationState
+            {
+                IsMovingRight = arr[i].IsMovingRight,
+                IsMovingLeft = arr[i].IsMovingLeft
+            });
         }
 
         return ret;

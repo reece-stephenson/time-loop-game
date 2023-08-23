@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerCopy : MonoBehaviour
@@ -9,16 +10,25 @@ public class PlayerCopy : MonoBehaviour
     public Vector2 startPosition { get; set; }
 
     public Queue<Vector2> _movements { get; set; }
+    public Queue<CommonAnimationState> _animations { get; set; }
     public Queue<Vector2> _movementsOriginal { get; set; }
 
     private IEnumerator _enumerator;
+    private IEnumerator _animationEnumerator;
+
+    private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
 
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _rigidBody.position = startPosition;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         _enumerator = _movements.GetEnumerator();
         _enumerator.MoveNext();
+        _animationEnumerator = _animations.GetEnumerator();
+        _animationEnumerator.MoveNext();
     }
 
     void Update()
@@ -34,12 +44,40 @@ public class PlayerCopy : MonoBehaviour
         //        _movements = GetDeepCopy(_movementsOriginal);
         //    }
 
+        // CommonAnimationState animationState = (CommonAnimationState)_animationEnumerator.Current;
+        // UpdateAnimationState(animationState);
+
         transform.position = Vector2.MoveTowards(_rigidBody.position, (Vector2)_enumerator.Current, 1000f);
-        
+
+
         if (!_enumerator.MoveNext())
         {
             _enumerator.Reset();
             _enumerator.MoveNext();
+        }
+
+        if (!_animationEnumerator.MoveNext())
+        {
+            _animationEnumerator.Reset();
+            _animationEnumerator.MoveNext();
+        }
+    }
+
+    private void UpdateAnimationState(CommonAnimationState animationState)
+    {
+        if (animationState.IsMovingRight)
+        {
+            _spriteRenderer.flipX = false;
+            _animator.SetBool("running", true);
+        }
+        else if (animationState.IsMovingLeft)
+        {
+            _spriteRenderer.flipX = true;
+            _animator.SetBool("running", true);
+        }
+        else
+        {
+            _animator.SetBool("running", false);
         }
     }
 
