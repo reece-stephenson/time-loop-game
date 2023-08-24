@@ -21,7 +21,7 @@ public class LoopController : MonoBehaviour
 
     void Start()
     {
-        _startPosition = new Vector2(-9.2f, -2.5f);
+        _startPosition = _player.GetComponent<PlayerMovement>().RigidBody.position;
         _copyPlayerColliders = new List<Collider2D>();
     }
 
