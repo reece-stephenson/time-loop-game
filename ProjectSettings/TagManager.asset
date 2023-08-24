@@ -44,6 +44,9 @@ TagManager:
   - name: MainShip
     uniqueID: 1943468933
     locked: 0
+  - name: TerrainNoCollision
+    uniqueID: 3312949777
+    locked: 0
   - name: Terrain
     uniqueID: 3050245313
     locked: 0
