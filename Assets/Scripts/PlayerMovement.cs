@@ -23,11 +23,14 @@ public class PlayerMovement : MonoBehaviour
     public Queue<Vector2> _movements { get; set; }
     public Queue<CommonAnimationState> _animations { get; set; }
 
+    public MovementState _movementState;
+
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _movements = new Queue<Vector2>();
         _animations = new Queue<CommonAnimationState>();
+        _movementState = new MovementState();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
     }
@@ -56,23 +59,36 @@ public class PlayerMovement : MonoBehaviour
         CommonAnimationState animationState = new CommonAnimationState
         {
             IsMovingRight = movementDirection > 0f,
-            IsMovingLeft = movementDirection < 0f
+            IsMovingLeft = movementDirection < 0f,
+            IsJumping = _rigidBody.velocity.y > .1f,
+            IsFalling = _rigidBody.velocity.y < -.1f,
         };
 
         if (movementDirection > 0f)
         {
+            _movementState = MovementState.running;
             _spriteRenderer.flipX = false;
-            _animator.SetBool("running", true);
         }
         else if (movementDirection < 0f)
         {
+            _movementState = MovementState.running;
             _spriteRenderer.flipX = true;
-            _animator.SetBool("running", true);
         }
         else
         {
-            _animator.SetBool("running", false);
+            _movementState = MovementState.idle;
         }
+
+        if (_rigidBody.velocity.y > 0f)
+        {
+            _movementState = MovementState.jumping;
+        }
+        else if (_rigidBody.velocity.y < -0f)
+        {
+            _movementState = MovementState.falling;
+        }
+
+        _animator.SetInteger("state", (int)_movementState);
 
         _animations.Enqueue(animationState);
     }

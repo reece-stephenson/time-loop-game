@@ -677,6 +677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 4
   _jumpHeight: 4
+  _movementState: 0
 --- !u!95 &1235073765
 Animator:
   serializedVersion: 5

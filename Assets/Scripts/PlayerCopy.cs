@@ -19,12 +19,15 @@ public class PlayerCopy : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
+    public MovementState _movementState;
+
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _rigidBody.position = startPosition;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _movementState = new MovementState();
         _enumerator = _movements.GetEnumerator();
         _enumerator.MoveNext();
         _animationEnumerator = _animations.GetEnumerator();
@@ -44,10 +47,10 @@ public class PlayerCopy : MonoBehaviour
         //        _movements = GetDeepCopy(_movementsOriginal);
         //    }
 
-        // CommonAnimationState animationState = (CommonAnimationState)_animationEnumerator.Current;
-        // UpdateAnimationState(animationState);
+        CommonAnimationState animationState = (CommonAnimationState)_animationEnumerator.Current;
+        UpdateAnimationState(animationState);
 
-        transform.position = Vector2.MoveTowards(_rigidBody.position, (Vector2)_enumerator.Current, 1000f);
+        transform.position = Vector2.MoveTowards(_rigidBody.position, (Vector2)_enumerator.Current, 10000f);
 
 
         if (!_enumerator.MoveNext())
@@ -67,18 +70,29 @@ public class PlayerCopy : MonoBehaviour
     {
         if (animationState.IsMovingRight)
         {
+            _movementState = MovementState.running;
             _spriteRenderer.flipX = false;
-            _animator.SetBool("running", true);
         }
         else if (animationState.IsMovingLeft)
         {
+            _movementState = MovementState.running;
             _spriteRenderer.flipX = true;
-            _animator.SetBool("running", true);
         }
         else
         {
-            _animator.SetBool("running", false);
+            _movementState = MovementState.idle;
         }
+
+        if (animationState.IsJumping)
+        {
+            _movementState = MovementState.jumping;
+        }
+        else if (animationState.IsFalling)
+        {
+            _movementState = MovementState.falling;
+        }
+
+        _animator.SetInteger("state", (int)_movementState);
     }
 
     private Queue<Vector2> GetDeepCopy(Queue<Vector2> queue)

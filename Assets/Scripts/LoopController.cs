@@ -5,7 +5,7 @@ using UnityEngine;
 public class LoopController : MonoBehaviour
 {
     [SerializeField]
-    private int _maxFrames = 6000;
+    private int _maxFrames = 3000;
     private int _currentFrame = 0;
 
     [SerializeField]
@@ -88,7 +88,9 @@ public class LoopController : MonoBehaviour
             ret.Enqueue(new CommonAnimationState
             {
                 IsMovingRight = arr[i].IsMovingRight,
-                IsMovingLeft = arr[i].IsMovingLeft
+                IsMovingLeft = arr[i].IsMovingLeft,
+                IsJumping = arr[i].IsJumping,
+                IsFalling= arr[i].IsFalling,
             });
         }
 
