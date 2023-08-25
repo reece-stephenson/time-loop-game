@@ -14,6 +14,9 @@ public class LoopController : MonoBehaviour
     [SerializeField]
     private GameObject _playerCopyPrefab;
 
+    [SerializeField]
+    private Resetable[] _resetObjects;
+
     private Vector2 _startPosition;
     public Vector2 StartPosition { get => _startPosition; }
 
@@ -54,6 +57,11 @@ public class LoopController : MonoBehaviour
             playerCopyScript._movements = GetDeepCopy(playerScript._movements);
 
             playerCopyScript._animations = GetAnimationDeepCopy(playerScript._animations);
+
+            foreach (var obj in _resetObjects)
+            {
+                obj.ResetPosition();
+            }
 
             playerScript.ResetMovement();
             playerScript.ResetAnimation();
