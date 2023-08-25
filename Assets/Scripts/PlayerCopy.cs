@@ -34,7 +34,7 @@ public class PlayerCopy : MonoBehaviour
         _animationEnumerator.MoveNext();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         //if (_movements != null)
         //    if (_movements.Count > 0)

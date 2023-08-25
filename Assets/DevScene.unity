@@ -23671,7 +23671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5072c2db661553a48abe201304f1829a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxFrames: 3000
+  timeBetweenClones: 5
   _player: {fileID: 1235073759}
   _playerCopyPrefab: {fileID: 1277171055371897069, guid: 3ed95d274804964498ba109e34a46772, type: 3}
 --- !u!4 &1568459128 stripped

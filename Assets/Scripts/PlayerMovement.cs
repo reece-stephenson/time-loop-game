@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (LockMovement) return;
 

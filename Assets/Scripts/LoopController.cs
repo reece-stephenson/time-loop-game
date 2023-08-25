@@ -5,8 +5,8 @@ using UnityEngine;
 public class LoopController : MonoBehaviour
 {
     [SerializeField]
-    private int _maxFrames = 3000;
-    private int _currentFrame = 0;
+    private float timeBetweenClones = 10f;
+    private float elapsedTime = 0f;
 
     [SerializeField]
     private GameObject _player;
@@ -25,15 +25,12 @@ public class LoopController : MonoBehaviour
         _copyPlayerColliders = new List<Collider2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (_currentFrame < _maxFrames)
-        {
-            _currentFrame++;
-        }
-        else
-        {
+        elapsedTime += Time.fixedDeltaTime;
 
+        if (elapsedTime >= timeBetweenClones)
+        {
             var playerScript = _player.GetComponent<PlayerMovement>();
 
             playerScript.LockMovement = true;
@@ -62,7 +59,7 @@ public class LoopController : MonoBehaviour
             playerScript.ResetAnimation();
             playerScript.LockMovement = false;
 
-            _currentFrame = 0;
+            elapsedTime = 0f;
 
         }
     }
