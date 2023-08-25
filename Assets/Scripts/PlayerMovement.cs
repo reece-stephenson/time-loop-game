@@ -8,7 +8,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
+    [SerializeField] private LayerMask _jumpableGround;
     public Rigidbody2D RigidBody { get => _rigidBody; }
+
+    private BoxCollider2D _boxCollider;
 
     private float movementDirection = 0f;
 
@@ -30,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _movements = new Queue<Vector2>();
         _animations = new Queue<CommonAnimationState>();
+        _boxCollider  = GetComponent<BoxCollider2D>();
         _movementState = new MovementState();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -39,11 +43,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMovement) return;
 
+
         movementDirection = Input.GetAxisRaw("Horizontal");
 
         var yVelocity = _rigidBody.velocity.y;
 
-        if (Input.GetKey("space"))
+        if (Input.GetKey("space") && IsGrounded())
         {
             yVelocity = _jumpHeight;
         }
@@ -79,11 +84,11 @@ public class PlayerMovement : MonoBehaviour
             _movementState = MovementState.idle;
         }
 
-        if (_rigidBody.velocity.y > 0f)
+        if (_rigidBody.velocity.y > .1f)
         {
             _movementState = MovementState.jumping;
         }
-        else if (_rigidBody.velocity.y < -0f)
+        else if (_rigidBody.velocity.y < -.1f)
         {
             _movementState = MovementState.falling;
         }
@@ -93,8 +98,18 @@ public class PlayerMovement : MonoBehaviour
         _animations.Enqueue(animationState);
     }
 
+    private bool IsGrounded()
+    {
+        return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.down, .1f, _jumpableGround);
+    }
+
     public void ResetMovement()
     {
         _movements.Clear();
+    }
+
+    public void ResetAnimation()
+    {
+        _animations.Clear();
     }
 }

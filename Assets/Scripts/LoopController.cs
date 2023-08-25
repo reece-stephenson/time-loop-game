@@ -59,6 +59,7 @@ public class LoopController : MonoBehaviour
             playerCopyScript._animations = GetAnimationDeepCopy(playerScript._animations);
 
             playerScript.ResetMovement();
+            playerScript.ResetAnimation();
             playerScript.LockMovement = false;
 
             _currentFrame = 0;
