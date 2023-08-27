@@ -9,9 +9,8 @@ public class PlayerCopy : MonoBehaviour
 
     public Vector2 startPosition { get; set; }
 
-    public Queue<Vector2> _movements { get; set; }
+    public Queue<MovementPair> _movements { get; set; }
     public Queue<CommonAnimationState> _animations { get; set; }
-    public Queue<Vector2> _movementsOriginal { get; set; }
 
     private IEnumerator _enumerator;
     private IEnumerator _animationEnumerator;
@@ -20,6 +19,11 @@ public class PlayerCopy : MonoBehaviour
     private Animator _animator;
 
     public MovementState _movementState;
+
+    [SerializeField]
+    private float _distanceThreshold = 1f;
+
+    private bool _resetDistance = false;
 
     public bool IsDead { get; set; }
 
@@ -42,11 +46,21 @@ public class PlayerCopy : MonoBehaviour
         {
             return;
         }
+        else
+        {
+            if (Vector2.Distance(_rigidBody.position, ((MovementPair)_enumerator.Current).Position) > _distanceThreshold && !_resetDistance)
+            {
+                return;
+            }
+        }
 
         CommonAnimationState animationState = (CommonAnimationState)_animationEnumerator.Current;
         UpdateAnimationState(animationState);
 
-        transform.position = Vector2.MoveTowards(_rigidBody.position, (Vector2)_enumerator.Current, 4F);
+        if (((MovementPair)_enumerator.Current).HasReceivedInput)
+            transform.position = Vector2.MoveTowards(_rigidBody.position, ((MovementPair)_enumerator.Current).Position, 4F);
+
+        _resetDistance = false;
     }
 
     private void UpdateAnimationState(CommonAnimationState animationState)
@@ -95,6 +109,7 @@ public class PlayerCopy : MonoBehaviour
     {
 
         _rigidBody.position = startPosition;
+        _resetDistance = true;
 
         _enumerator.Reset();
         _enumerator.MoveNext();

@@ -100,10 +100,10 @@ public class LoopController : MonoBehaviour
         LockReset = false; 
     }
 
-    private Queue<Vector2> GetDeepCopy(Queue<Vector2> queue)
+    private Queue<MovementPair> GetDeepCopy(Queue<MovementPair> queue)
     {
         var arr = queue.ToArray();
-        var ret = new Queue<Vector2>();
+        var ret = new Queue<MovementPair>();
 
         for (int i = 0; i < arr.Length; i++)
         {
@@ -112,6 +112,7 @@ public class LoopController : MonoBehaviour
 
         return ret;
     }
+
     private Queue<CommonAnimationState> GetAnimationDeepCopy(Queue<CommonAnimationState> queue)
     {
         var arr = queue.ToArray();
@@ -134,6 +135,6 @@ public class LoopController : MonoBehaviour
 
 public class MovementPair
 {
-    Vector2 Position { get; set; }
-    bool HasReceivedInput { get; set; }
+    public Vector2 Position { get; set; }
+    public bool HasReceivedInput { get; set; }
 }
