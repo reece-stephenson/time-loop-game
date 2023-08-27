@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 2587930777115526372}
   _movementState: 0
-  _distanceThreshold: 0.2
+  _distanceThreshold: 1
 --- !u!95 &1293958410628921557
 Animator:
   serializedVersion: 5

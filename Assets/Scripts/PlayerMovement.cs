@@ -74,8 +74,6 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        movementDirection = Input.GetAxisRaw("Horizontal");
-
         var yVelocity = _rigidBody.velocity.y;
 
         if (Input.GetKey("space") && IsGrounded())
