@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _jumpableGround;
     public Rigidbody2D RigidBody { get => _rigidBody; }
 
+    public bool IsDead { get; set; }
+
     private BoxCollider2D _boxCollider;
 
     private float movementDirection = 0f;
@@ -42,6 +44,13 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (LockMovement) return;
+
+        if (IsDead)
+        {
+            movementDirection = 0f;
+            UpdateAnimationState();
+            return;
+        }
 
 
         movementDirection = Input.GetAxisRaw("Horizontal");
@@ -105,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetMovement()
     {
+        IsDead = false;
         _movements.Clear();
     }
 

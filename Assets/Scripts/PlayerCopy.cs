@@ -21,6 +21,8 @@ public class PlayerCopy : MonoBehaviour
 
     public MovementState _movementState;
 
+    public bool IsDead { get; set; }
+
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
