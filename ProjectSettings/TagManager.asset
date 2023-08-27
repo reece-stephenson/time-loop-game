@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - HelpText
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2714082515
+    locked: 0
+  - name: HelpText
+    uniqueID: 3878874135
     locked: 0
