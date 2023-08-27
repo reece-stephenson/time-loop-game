@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 2587930777115526372}
   _movementState: 0
+  _distanceThreshold: 0.2
 --- !u!95 &1293958410628921557
 Animator:
   serializedVersion: 5

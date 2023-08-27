@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _jumpableGround;
     public Rigidbody2D RigidBody { get => _rigidBody; }
 
+    public bool IsDead { get; set; }
+
     private BoxCollider2D _boxCollider;
 
     private float movementDirection = 0f;
@@ -23,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool LockMovement { get; set; } = false;
 
-    public Queue<Vector2> _movements { get; set; }
+    public Queue<MovementPair> _movements { get; set; }
     public Queue<CommonAnimationState> _animations { get; set; }
 
     public MovementState _movementState;
@@ -35,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
-        _movements = new Queue<Vector2>();
+        _movements = new Queue<MovementPair>();
         _animations = new Queue<CommonAnimationState>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _movementState = new MovementState();
@@ -59,6 +61,20 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = Vector3.zero;
             movementDirection = Input.GetAxisRaw("Horizontal");
         }
+        
+        if (IsDead)
+        {
+            movementDirection = 0f;
+            UpdateAnimationState();
+            _movements.Enqueue(new MovementPair
+            {
+                Position = _rigidBody.position,
+                HasReceivedInput = false
+            });
+            return;
+        }
+
+        movementDirection = Input.GetAxisRaw("Horizontal");
 
         var yVelocity = _rigidBody.velocity.y;
 
@@ -76,7 +92,11 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateAnimationState();
 
-        _movements.Enqueue(_rigidBody.position);
+        _movements.Enqueue(new MovementPair
+        {
+            Position = _rigidBody.position,
+            HasReceivedInput = movementDirection != 0f || yVelocity != _rigidBody.velocity.y
+        });
         _rigidBody.velocity = new Vector2(movementDirection * _movementSpeed, yVelocity);
     }
 
@@ -163,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetMovement()
     {
+        IsDead = false;
         _movements.Clear();
     }
 
