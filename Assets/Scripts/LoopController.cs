@@ -84,25 +84,20 @@ public class LoopController : MonoBehaviour
         }
 
         _copyPlayers.Add(newCopy);
-        
-            if(currentColorIndex == loopColours.Length - 1)
-            {
-                currentColorIndex = 0;
-            }
 
-            playerScript._spriteRenderer.color = loopColours[currentColorIndex + 1];
+        if (currentColorIndex == loopColours.Length - 1)
+        {
+            currentColorIndex = 0;
+        }
 
-            Color copySpriteColor = loopColours[currentColorIndex];
-            copySpriteColor.a = 0.3f;
+        playerScript._spriteRenderer.color = loopColours[currentColorIndex + 1];
 
-            playerCopyScript._spriteRenderer.color = copySpriteColor;
+        Color copySpriteColor = loopColours[currentColorIndex];
+        copySpriteColor.a = 0.3f;
 
-            currentColorIndex++;
+        playerCopyScript._spriteRenderer.color = copySpriteColor;
 
-            playerScript.ResetMovement();
-            playerScript.ResetAnimation();
-            playerScript.LockMovement = false;
-            _playerRigidBody.gravityScale = 1;
+        currentColorIndex++;       
 
         playerCopyScript.startPosition = _startPosition;
         playerCopyScript._movements = GetDeepCopy(playerScript._movements);
@@ -116,11 +111,12 @@ public class LoopController : MonoBehaviour
 
         playerScript.ResetMovement();
         playerScript.ResetAnimation();
+        _playerRigidBody.gravityScale = 1;
         playerScript.LockMovement = false;
 
         elapsedTime = 0f;
 
-        LockReset = false; 
+        LockReset = false;
     }
 
     private Queue<MovementPair> GetDeepCopy(Queue<MovementPair> queue)

@@ -65,6 +65,15 @@ public class PlayerCopy : MonoBehaviour
 
     private void UpdateAnimationState(CommonAnimationState animationState)
     {
+        if(animationState.IsGravityFlipped)
+        {
+            _rigidBody.gravityScale = -1;
+        }
+        else
+        {
+            _rigidBody.gravityScale = 1;
+        }
+
         if(!animationState.IsGravityFlipped)
         {
             _spriteRenderer.flipY = false;
