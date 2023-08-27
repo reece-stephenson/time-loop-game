@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementState: 0
-  _distanceThreshold: 0.1
+  _distanceThreshold: 0.2
 --- !u!95 &1293958410628921557
 Animator:
   serializedVersion: 5
