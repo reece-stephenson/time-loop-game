@@ -28,9 +28,18 @@ public class DoorController : MonoBehaviour
     private float _rotation = 0;
 
     private int _collisionCount = 0;
+    private AudioSource _audioSource;
+
+    void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     public void Activate()
     {
+
+        _audioSource.Play();
+
         foreach (var tile in _activatePaintTiles)
         {
             var currentCell = new Vector3Int((int)tile.x, (int)tile.y);
@@ -48,6 +57,9 @@ public class DoorController : MonoBehaviour
 
     public void Deactivate()
     {
+
+        _audioSource.Play();
+
         foreach (var tile in _deactivatePaintTiles)
         {
 
