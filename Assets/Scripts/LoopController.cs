@@ -17,10 +17,16 @@ public class LoopController : MonoBehaviour
     [SerializeField]
     private Resetable[] _resetObjects;
 
+    [SerializeField]
+    private Rigidbody2D _playerRigidBody;
+
     private Vector2 _startPosition;
     public Vector2 StartPosition { get => _startPosition; }
 
     private List<Collider2D> _copyPlayerColliders;
+
+    [SerializeField] Color[] loopColours;
+    private int currentColorIndex = 0;
 
     void Start()
     {
@@ -58,12 +64,27 @@ public class LoopController : MonoBehaviour
 
             playerCopyScript._animations = GetAnimationDeepCopy(playerScript._animations);
 
+            if(currentColorIndex == loopColours.Length - 1)
+            {
+                currentColorIndex = 0;
+            }
+
+            playerScript._spriteRenderer.color = loopColours[currentColorIndex + 1];
+
+            Color copySpriteColor = loopColours[currentColorIndex];
+            copySpriteColor.a = 0.3f;
+
+            playerCopyScript._spriteRenderer.color = copySpriteColor;
+
+            currentColorIndex++;
+
             foreach (var obj in _resetObjects)
             {
                 obj.ResetPosition();
             }
 
             playerScript.ResetMovement();
+            _playerRigidBody.gravityScale = 1;
             playerScript.ResetAnimation();
             playerScript.LockMovement = false;
 
@@ -96,7 +117,8 @@ public class LoopController : MonoBehaviour
                 IsMovingRight = arr[i].IsMovingRight,
                 IsMovingLeft = arr[i].IsMovingLeft,
                 IsJumping = arr[i].IsJumping,
-                IsFalling= arr[i].IsFalling,
+                IsFalling = arr[i].IsFalling,
+                IsGravityFlipped = arr[i].IsGravityFlipped,
             });
         }
 

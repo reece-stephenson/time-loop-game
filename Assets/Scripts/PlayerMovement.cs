@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
-    private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer _spriteRenderer;
     private Animator _animator;
     [SerializeField] private LayerMask _jumpableGround;
     public Rigidbody2D RigidBody { get => _rigidBody; }
@@ -28,12 +28,16 @@ public class PlayerMovement : MonoBehaviour
 
     public MovementState _movementState;
 
+    private bool top;
+
+    private bool isGravityFlipped;
+
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _movements = new Queue<Vector2>();
         _animations = new Queue<CommonAnimationState>();
-        _boxCollider  = GetComponent<BoxCollider2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
         _movementState = new MovementState();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -43,14 +47,31 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMovement) return;
 
-
-        movementDirection = Input.GetAxisRaw("Horizontal");
+        if (_rigidBody.gravityScale != 1)
+        {
+            isGravityFlipped = true;
+            transform.eulerAngles = transform.eulerAngles = new Vector3(0, 0, 180f);
+            movementDirection = -Input.GetAxisRaw("Horizontal");
+        }
+        else
+        {
+            isGravityFlipped = false;
+            transform.eulerAngles = Vector3.zero;
+            movementDirection = Input.GetAxisRaw("Horizontal");
+        }
 
         var yVelocity = _rigidBody.velocity.y;
 
         if (Input.GetKey("space") && IsGrounded())
         {
-            yVelocity = _jumpHeight;
+            if(!isGravityFlipped)
+            {
+                yVelocity = _jumpHeight;
+            }
+            else
+            {
+                yVelocity = -_jumpHeight;
+            }
         }
 
         UpdateAnimationState();
@@ -67,17 +88,32 @@ public class PlayerMovement : MonoBehaviour
             IsMovingLeft = movementDirection < 0f,
             IsJumping = _rigidBody.velocity.y > .1f,
             IsFalling = _rigidBody.velocity.y < -.1f,
+            IsGravityFlipped = isGravityFlipped,
         };
 
         if (movementDirection > 0f)
         {
             _movementState = MovementState.running;
-            _spriteRenderer.flipX = false;
+            if (!isGravityFlipped)
+            {
+                _spriteRenderer.flipX = false;
+            }
+            else
+            {
+                _spriteRenderer.flipX = true;
+            }
         }
         else if (movementDirection < 0f)
         {
             _movementState = MovementState.running;
-            _spriteRenderer.flipX = true;
+            if (!isGravityFlipped)
+            {
+                _spriteRenderer.flipX = true;
+            }
+            else
+            {
+                _spriteRenderer.flipX = false;
+            }
         }
         else
         {
@@ -86,11 +122,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (_rigidBody.velocity.y > .1f)
         {
-            _movementState = MovementState.jumping;
+            if(!isGravityFlipped)
+            {
+                _movementState = MovementState.jumping;  
+            }
+            else
+            {
+                _movementState = MovementState.falling;
+            }
+            
         }
         else if (_rigidBody.velocity.y < -.1f)
         {
-            _movementState = MovementState.falling;
+            if(!isGravityFlipped)
+            {
+                _movementState = MovementState.falling;  
+            }
+            else
+            {
+                _movementState = MovementState.jumping;
+            }
         }
 
         _animator.SetInteger("state", (int)_movementState);
@@ -100,7 +151,14 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.down, .1f, _jumpableGround);
+        if (!isGravityFlipped)
+        {
+            return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.down, .1f, _jumpableGround);
+        }
+        else
+        {
+            return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.up, .1f, _jumpableGround);
+        }
     }
 
     public void ResetMovement()
