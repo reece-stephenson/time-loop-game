@@ -5,7 +5,7 @@ using UnityEngine;
 public class LoopController : MonoBehaviour
 {
     [SerializeField]
-    private int _maxFrames = 3000;
+    private int _maxFrames = 2000;
     private int _currentFrame = 0;
 
     [SerializeField]
