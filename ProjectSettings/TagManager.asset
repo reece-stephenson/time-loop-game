@@ -8,11 +8,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ship
   - Water
   - UI
   - Ground
-  - 
+  - SpaceLayer
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background Main
+    uniqueID: 3345988447
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -52,4 +55,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2714082515
+    locked: 0
+  - name: Foreground Asteroid
+    uniqueID: 2008171031
     locked: 0
