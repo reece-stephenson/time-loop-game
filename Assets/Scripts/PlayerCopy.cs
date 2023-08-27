@@ -16,7 +16,7 @@ public class PlayerCopy : MonoBehaviour
     private IEnumerator _enumerator;
     private IEnumerator _animationEnumerator;
 
-    private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
     public MovementState _movementState;
@@ -68,6 +68,15 @@ public class PlayerCopy : MonoBehaviour
 
     private void UpdateAnimationState(CommonAnimationState animationState)
     {
+        if(!animationState.IsGravityFlipped)
+        {
+            _spriteRenderer.flipY = false;
+        }
+        else
+        {
+            _spriteRenderer.flipY = true;
+        }
+
         if (animationState.IsMovingRight)
         {
             _movementState = MovementState.running;
