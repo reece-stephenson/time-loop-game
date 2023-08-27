@@ -114,19 +114,6 @@ public class TrapController : MonoBehaviour
         return trapPositions.ToArray();
     }
 
-    public class Trap : MonoBehaviour
-    {
-        public bool IsActive { get; set; }
-        public int[] Tiles { get; set; }
-        public Vector2 StartPosition { get; set; }
-        public Direction Direction { get; set; }
-    }
-
-    public enum Direction
-    {
-        UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(_tilemap.WorldToCell(collision.transform.position));
@@ -161,4 +148,17 @@ public class TrapController : MonoBehaviour
             }
         }
     }
+}
+
+public class Trap
+{
+    public bool IsActive { get; set; }
+    public int[] Tiles { get; set; }
+    public Vector2 StartPosition { get; set; }
+    public Direction Direction { get; set; }
+}
+
+public enum Direction
+{
+    UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3
 }

@@ -47,7 +47,11 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (LockMovement) return;
+        if (LockMovement)
+        {
+            Debug.Log("Not moving A");
+            return;
+        }
 
         if (_rigidBody.gravityScale != 1)
         {
@@ -64,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (IsDead)
         {
+            Debug.Log("Not moving B");
             movementDirection = 0f;
             UpdateAnimationState();
             _movements.Enqueue(new MovementPair
@@ -181,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetMovement()
     {
+        LockMovement = false;
         IsDead = false;
         _movements.Clear();
     }

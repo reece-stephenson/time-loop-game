@@ -112,7 +112,6 @@ public class LoopController : MonoBehaviour
         playerScript.ResetMovement();
         playerScript.ResetAnimation();
         _playerRigidBody.gravityScale = 1;
-        playerScript.LockMovement = false;
 
         elapsedTime = 0f;
 

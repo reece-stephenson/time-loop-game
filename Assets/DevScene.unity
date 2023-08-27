@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.21008284, g: 0.21008284, b: 0.21008284, a: 1}
+  m_IndirectSpecularColor: {r: 0.20996197, g: 0.20996197, b: 0.20996197, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -347,7 +347,6 @@ MonoBehaviour:
   - {x: -30, y: 2}
   - {x: -29, y: 2}
   _doorTile: {fileID: 11400000, guid: 96d2380c458edd443b7cae23900d6bca, type: 2}
-  _rotation: 180
 --- !u!58 &237949384
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -736,7 +735,6 @@ MonoBehaviour:
   - {x: -43, y: 4}
   _deactivateUnPaintTiles: []
   _doorTile: {fileID: 11400000, guid: 88482fec9bcf0be42811a7223f696829, type: 2}
-  _rotation: 0
 --- !u!58 &347706506
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18610,7 +18608,6 @@ MonoBehaviour:
   - {x: -43, y: 0}
   - {x: -43, y: 1}
   _doorTile: {fileID: 11400000, guid: 88482fec9bcf0be42811a7223f696829, type: 2}
-  _rotation: 0
 --- !u!58 &1114627893
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19289,7 +19286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4f394d46a87bb419b8d6728453d9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 0}
+  _spriteRenderer: {fileID: 1235073760}
   _jumpableGround:
     serializedVersion: 2
     m_Bits: 64
@@ -19842,7 +19839,6 @@ MonoBehaviour:
   - {x: -40, y: -3}
   _deactivateUnPaintTiles: []
   _doorTile: {fileID: 11400000, guid: 88482fec9bcf0be42811a7223f696829, type: 2}
-  _rotation: 0
 --- !u!58 &1523322110
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20070,13 +20066,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5072c2db661553a48abe201304f1829a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenClones: 5
+  timeBetweenClones: 25
   _player: {fileID: 1235073759}
   _playerCopyPrefab: {fileID: 1277171055371897069, guid: 3ed95d274804964498ba109e34a46772, type: 3}
   _resetObjects:
   - {fileID: 768577307}
   _playerRigidBody: {fileID: 0}
-  loopColours: []
+  loopColours:
+  - {r: 0.623899, g: 0.7830189, b: 0.36565503, a: 1}
+  - {r: 0.78431374, g: 0.40882495, b: 0.36470586, a: 1}
 --- !u!1 &1564860188
 GameObject:
   m_ObjectHideFlags: 0
@@ -21629,7 +21627,6 @@ MonoBehaviour:
   - {x: -43, y: -6}
   _deactivateUnPaintTiles: []
   _doorTile: {fileID: 11400000, guid: 88482fec9bcf0be42811a7223f696829, type: 2}
-  _rotation: 0
 --- !u!58 &1899880403
 CircleCollider2D:
   m_ObjectHideFlags: 0
