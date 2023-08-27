@@ -24,31 +24,56 @@ public class DoorController : MonoBehaviour
     [SerializeField]
     private Tile _doorTile;
 
+    [SerializeField]
+    private float _rotation = 0;
+
     private int _collisionCount = 0;
+    private AudioSource _audioSource;
+
+    void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     public void Activate()
     {
+
+        _audioSource.Play();
+
         foreach (var tile in _activatePaintTiles)
         {
-            _tilemap.SetTile(new Vector3Int((int)tile.x, (int)tile.y), _doorTile);
+            var currentCell = new Vector3Int((int)tile.x, (int)tile.y);
+            _tilemap.SetTile(currentCell, _doorTile);
+            _tilemap.SetTransformMatrix(currentCell, Matrix4x4.Rotate(Quaternion.Euler(0, 0, 180f)));
         }
 
         foreach (var tile in _activateUnPaintTiles)
         {
-            _tilemap.SetTile(new Vector3Int((int)tile.x, (int)tile.y), null);
+            var currentCell = new Vector3Int((int)tile.x, (int)tile.y);
+            _tilemap.SetTile(currentCell, null);
+            _tilemap.SetTransformMatrix(currentCell, Matrix4x4.Rotate(Quaternion.Euler(0, 0, 180f)));
         }
     }
 
     public void Deactivate()
     {
+
+        _audioSource.Play();
+
         foreach (var tile in _deactivatePaintTiles)
         {
-            _tilemap.SetTile(new Vector3Int((int)tile.x, (int)tile.y), _doorTile);
+
+            var currentCell = new Vector3Int((int)tile.x, (int)tile.y);
+            _tilemap.SetTile(currentCell, _doorTile);
+            _tilemap.SetTransformMatrix(currentCell, Matrix4x4.Rotate(Quaternion.Euler(0, 0, 180f)));
         }
 
         foreach (var tile in _deactivateUnPaintTiles)
         {
-            _tilemap.SetTile(new Vector3Int((int)tile.x, (int)tile.y), null);
+
+            var currentCell = new Vector3Int((int)tile.x, (int)tile.y);
+            _tilemap.SetTile(currentCell, null);
+            _tilemap.SetTransformMatrix(currentCell, Matrix4x4.Rotate(Quaternion.Euler(0, 0, 180f)));
         }
     }
 
