@@ -21,9 +21,12 @@ public class ElevatorController : MonoBehaviour
 
     private Vector2 _target;
 
+    private AudioSource _audioSource;
+
     void Start()
     {
         _target = _startPosition;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -33,11 +36,13 @@ public class ElevatorController : MonoBehaviour
 
     public void Activate()
     {
+        _audioSource.Play();
         _target = _endPosition;
     }
 
     public void Deactivate()
     {
+        _audioSource.Play();
         _target = _startPosition;
     }
 

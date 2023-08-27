@@ -19,6 +19,13 @@ public class TrapController : MonoBehaviour
             StartPosition = new Vector2(-34, -6),
             Direction = Direction.UP,
             Tiles = new int[] { 0 }
+        },
+        new Trap
+        {
+            IsActive = true,
+            StartPosition = new Vector2(-26, 5),
+            Direction = Direction.DOWN,
+            Tiles = new int[] { 1, 2 }
         }
     };
 
@@ -50,7 +57,7 @@ public class TrapController : MonoBehaviour
         var (trap, trapPositions) = GetTrap(position);
         var currentCell = new Vector3Int((int)trap.StartPosition.x, (int)trap.StartPosition.y);
 
-        _tilemap.SetTile(currentCell, _tiles[trap.Tiles[0]]);
+        _tilemap.SetTile(currentCell, null);
 
         for (int i = 1; i < trapPositions.Length; i++)
         {
@@ -66,6 +73,8 @@ public class TrapController : MonoBehaviour
         {
             var trapPositions = GetTrapTilePositions(trap);
             if (trapPositions.Contains(position))
+                return (trap, trapPositions);
+            if (trapPositions.Contains(new Vector2(position.x, position.y - 1)))
                 return (trap, trapPositions);
         }
 
@@ -120,13 +129,36 @@ public class TrapController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        try
+        Debug.Log(_tilemap.WorldToCell(collision.transform.position));
+
+        var worldPosition = _tilemap.WorldToCell(collision.transform.position);
+
+        var (trap, positions) = GetTrap(new Vector2(worldPosition.x, worldPosition.y));
+
+        if (trap == null)
         {
-            collision.gameObject.GetComponent<PlayerMovement>().IsDead = true;
+            try
+            {
+                collision.gameObject.GetComponent<PlayerMovement>().IsDead = true;
+            }
+            catch
+            {
+                collision.gameObject.GetComponent<PlayerCopy>().IsDead = true;
+            }
+
+            return;
         }
-        catch
+
+        if (trap.IsActive)
         {
-            collision.gameObject.GetComponent<PlayerCopy>().IsDead = true;
+            try
+            {
+                collision.gameObject.GetComponent<PlayerMovement>().IsDead = true;
+            }
+            catch
+            {
+                collision.gameObject.GetComponent<PlayerCopy>().IsDead = true;
+            }
         }
     }
 }

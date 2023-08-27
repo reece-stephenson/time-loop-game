@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         {
             movementDirection = 0f;
             UpdateAnimationState();
+            _movements.Enqueue(_rigidBody.position);
             return;
         }
 
