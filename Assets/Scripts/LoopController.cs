@@ -112,7 +112,8 @@ public class LoopController : MonoBehaviour
             obj.ResetPosition();
         }
 
-        buildingAreaLogicController.ResetObjects();
+        if (buildingAreaLogicController != null)
+            buildingAreaLogicController.ResetObjects();
         playerScript.ResetMovement();
         playerScript.ResetAnimation();
         _playerRigidBody.gravityScale = 1;
