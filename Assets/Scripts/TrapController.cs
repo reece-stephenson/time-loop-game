@@ -26,6 +26,13 @@ public class TrapController : MonoBehaviour
             StartPosition = new Vector2(-26, 5),
             Direction = Direction.DOWN,
             Tiles = new int[] { 1, 2 }
+        },
+        new Trap
+        {
+            IsActive = true,
+            StartPosition = new Vector2(0, 0),
+            Direction = Direction.DOWN,
+            Tiles = new int[] { 1, 2 }
         }
     };
 
