@@ -3995,13 +3995,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenClones: 25
-  _player: {fileID: 0}
+  _player: {fileID: 1976543316}
   _playerCopyPrefab: {fileID: 1277171055371897069, guid: 3ed95d274804964498ba109e34a46772, type: 3}
   _resetObjects:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _playerRigidBody: {fileID: 0}
+  _playerRigidBody: {fileID: 1976543317}
   buildingAreaLogicController: {fileID: 0}
   loopColours:
   - {r: 0.623899, g: 0.7830189, b: 0.36565503, a: 1}
@@ -4721,6 +4721,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
+--- !u!1 &1976543316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3433785796787202224, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
+  m_PrefabInstance: {fileID: 1976543315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1976543317 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 2420625350573398142, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
+  m_PrefabInstance: {fileID: 1976543315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1982421955
 GameObject:
   m_ObjectHideFlags: 0
