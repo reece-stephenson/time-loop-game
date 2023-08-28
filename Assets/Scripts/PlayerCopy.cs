@@ -9,17 +9,23 @@ public class PlayerCopy : MonoBehaviour
 
     public Vector2 startPosition { get; set; }
 
-    public Queue<Vector2> _movements { get; set; }
+    public Queue<MovementPair> _movements { get; set; }
     public Queue<CommonAnimationState> _animations { get; set; }
-    public Queue<Vector2> _movementsOriginal { get; set; }
 
     private IEnumerator _enumerator;
     private IEnumerator _animationEnumerator;
 
-    private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer _spriteRenderer;
     private Animator _animator;
 
     public MovementState _movementState;
+
+    [SerializeField]
+    private float _distanceThreshold = 1f;
+
+    private bool _resetDistance = false;
+
+    public bool IsDead { get; set; }
 
     void Start()
     {
@@ -36,38 +42,47 @@ public class PlayerCopy : MonoBehaviour
 
     void FixedUpdate()
     {
-        //if (_movements != null)
-        //    if (_movements.Count > 0)
-        //    {
-        //        transform.position = Vector2.MoveTowards(_rigidBody.position, _movements.Dequeue(), 1000f);
-        //    }
-        //    else
-        //    {
-        //        _rigidBody.position = startPosition;
-        //        _movements = GetDeepCopy(_movementsOriginal);
-        //    }
+        if (!_enumerator.MoveNext() || !_animationEnumerator.MoveNext())
+        {
+            return;
+        }
+        else
+        {
+            if (Vector2.Distance(_rigidBody.position, ((MovementPair)_enumerator.Current).Position) > _distanceThreshold && !_resetDistance)
+            {
+                return;
+            }
+        }
 
         CommonAnimationState animationState = (CommonAnimationState)_animationEnumerator.Current;
         UpdateAnimationState(animationState);
 
-        transform.position = Vector2.MoveTowards(_rigidBody.position, (Vector2)_enumerator.Current, 10000f);
+        if (((MovementPair)_enumerator.Current).HasReceivedInput)
+            transform.position = Vector2.MoveTowards(_rigidBody.position, ((MovementPair)_enumerator.Current).Position, 4F);
 
-
-        if (!_enumerator.MoveNext())
-        {
-            _enumerator.Reset();
-            _enumerator.MoveNext();
-        }
-
-        if (!_animationEnumerator.MoveNext())
-        {
-            _animationEnumerator.Reset();
-            _animationEnumerator.MoveNext();
-        }
+        _resetDistance = false;
     }
 
     private void UpdateAnimationState(CommonAnimationState animationState)
     {
+        if(animationState.IsGravityFlipped)
+        {
+            _rigidBody.gravityScale = -1;
+        }
+        else
+        {
+            _rigidBody.gravityScale = 1;
+        }
+
+        if(!animationState.IsGravityFlipped)
+        {
+            _spriteRenderer.flipY = false;
+        }
+        else
+        {
+            _spriteRenderer.flipY = true;
+        }
+
         if (animationState.IsMovingRight)
         {
             _movementState = MovementState.running;
@@ -106,5 +121,18 @@ public class PlayerCopy : MonoBehaviour
         }
 
         return ret;
+    }
+
+    public void ResetMovement(Vector2 startPosition)
+    {
+
+        _rigidBody.position = startPosition;
+        _resetDistance = true;
+
+        _enumerator.Reset();
+        _enumerator.MoveNext();
+
+        _animationEnumerator.Reset();
+        _animationEnumerator.MoveNext();
     }
 }

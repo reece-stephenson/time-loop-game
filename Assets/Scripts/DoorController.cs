@@ -24,8 +24,8 @@ public class DoorController : MonoBehaviour
     [SerializeField]
     private Tile _doorTile;
 
-    [SerializeField]
-    private float _rotation = 0;
+    //[SerializeField]
+    //private float _rotation = 0;
 
     private int _collisionCount = 0;
     private AudioSource _audioSource;
