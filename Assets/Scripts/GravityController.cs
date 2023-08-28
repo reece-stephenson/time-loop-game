@@ -14,6 +14,10 @@ public class GravityController : MonoBehaviour
         UpdateGravity();
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        _rigidbody.gravityScale = 1;
+    }
+
     private void UpdateGravity()
     {
         if (_rigidbody)
