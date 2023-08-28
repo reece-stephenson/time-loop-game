@@ -20,6 +20,9 @@ public class LoopController : MonoBehaviour
     [SerializeField]
     private Rigidbody2D _playerRigidBody;
 
+    [SerializeField]
+    private BuildingAreaLogicController buildingAreaLogicController;
+
     private Vector2 _startPosition;
     public Vector2 StartPosition { get => _startPosition; }
 
@@ -109,6 +112,7 @@ public class LoopController : MonoBehaviour
             obj.ResetPosition();
         }
 
+        buildingAreaLogicController.ResetObjects();
         playerScript.ResetMovement();
         playerScript.ResetAnimation();
         _playerRigidBody.gravityScale = 1;
