@@ -48,6 +48,9 @@ TagManager:
   - name: TerrainNoCollision
     uniqueID: 3312949777
     locked: 0
+  - name: Background Objects
+    uniqueID: 417010133
+    locked: 0
   - name: Terrain
     uniqueID: 3050245313
     locked: 0
