@@ -25188,7 +25188,7 @@ GameObject:
   - component: {fileID: 1570996390}
   - component: {fileID: 1570996389}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GravityTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
