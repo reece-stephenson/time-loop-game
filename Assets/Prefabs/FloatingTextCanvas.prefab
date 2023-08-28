@@ -142,7 +142,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6197637752075778661}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: f22e24a39d6dc5a4b98d84fdc3915273, type: 2}
   m_Animations:
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 573953714501218232}
   - component: {fileID: 9064233112928832951}
   m_Layer: 5
-  m_Name: Floating Text Canvas
+  m_Name: FloatingTextCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &9064233112928832951
 MonoBehaviour:
   m_ObjectHideFlags: 0
