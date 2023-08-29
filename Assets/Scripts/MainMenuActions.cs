@@ -11,6 +11,36 @@ public class MainMenuActions : MonoBehaviour
         SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
         SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
     }
+
+    public void HighscoresButtonCLick()
+    {
+        LeaderboardController.Instance.SubmitScore();
+    }
+
+    public async void QuitButtonClick()
+    {
+        LeaderboardController.Instance.GetScores((response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("fetched");
+                Debug.Log(response.items.Length);
+
+                foreach (var item in response.items)
+                {
+                    Debug.Log(item.member_id);
+                }
+            }
+            else
+            {
+                Debug.Log("Not fetched");
+                Debug.Log(response.Error);
+            }
+        });
+
+        
+    }
+
 }
 
 public enum Scenes
