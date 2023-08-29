@@ -23,6 +23,10 @@ public class LoopController : MonoBehaviour
     [SerializeField]
     private BuildingAreaLogicController buildingAreaLogicController;
 
+    [SerializeField]
+    private float _startDelay = 15f;
+    private bool _hasStarted = false;
+
     private Vector2 _startPosition;
     public Vector2 StartPosition { get => _startPosition; }
 
@@ -36,17 +40,39 @@ public class LoopController : MonoBehaviour
     [SerializeField] Color[] loopColours;
     private int currentColorIndex = 0;
 
+    private AudioSource _audioSOurceLoopImminent;
+    private bool _playingLoopImminent = false;
+
     void Start()
     {
         _startPosition = _player.GetComponent<PlayerMovement>().RigidBody.position;
         _copyPlayerColliders = new List<Collider2D>();
         _playerCopies = new List<PlayerCopy>();
         _copyPlayers = new List<GameObject>();
+        _audioSOurceLoopImminent = GetComponent<AudioSource>();
+        _player.GetComponent<PlayerMovement>().LockMovement = true;
     }
 
     void FixedUpdate()
     {
         elapsedTime += Time.fixedDeltaTime;
+
+        if (elapsedTime < _startDelay && !_hasStarted)
+            return;
+
+        if (!_hasStarted)
+        {
+            _player.GetComponent<PlayerMovement>().LockMovement = false;
+            _hasStarted = true;
+            elapsedTime = 0;
+        }
+
+        if (elapsedTime >= timeBetweenClones - 5f && !_playingLoopImminent)
+        {
+            Debug.Log(elapsedTime);
+            _playingLoopImminent = true;
+            _audioSOurceLoopImminent.Play();
+        }
 
         if (elapsedTime >= timeBetweenClones && !LockReset)
         {
@@ -56,7 +82,7 @@ public class LoopController : MonoBehaviour
 
     private void OnGUI()
     {
-        if (Input.GetKeyDown(KeyCode.R) && elapsedTime > 3f)
+        if (Input.GetKeyDown(KeyCode.R) && elapsedTime > 3f && _hasStarted)
         {
             if (!LockReset)
                 ResetAll();
@@ -65,6 +91,7 @@ public class LoopController : MonoBehaviour
 
     private void ResetAll()
     {
+        _playingLoopImminent = false;
         LockReset = true;
 
         var playerScript = _player.GetComponent<PlayerMovement>();
