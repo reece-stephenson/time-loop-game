@@ -36,17 +36,28 @@ public class LoopController : MonoBehaviour
     [SerializeField] Color[] loopColours;
     private int currentColorIndex = 0;
 
+    private AudioSource _audioSOurceLoopImminent;
+    private bool _playingLoopImminent = false;
+
     void Start()
     {
         _startPosition = _player.GetComponent<PlayerMovement>().RigidBody.position;
         _copyPlayerColliders = new List<Collider2D>();
         _playerCopies = new List<PlayerCopy>();
         _copyPlayers = new List<GameObject>();
+        _audioSOurceLoopImminent = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
     {
         elapsedTime += Time.fixedDeltaTime;
+
+        if (elapsedTime >= timeBetweenClones - 5f && !_playingLoopImminent)
+        {
+            Debug.Log(elapsedTime);
+            _playingLoopImminent = true;
+            _audioSOurceLoopImminent.Play();
+        }
 
         if (elapsedTime >= timeBetweenClones && !LockReset)
         {
@@ -65,6 +76,7 @@ public class LoopController : MonoBehaviour
 
     private void ResetAll()
     {
+        _playingLoopImminent = false;
         LockReset = true;
 
         var playerScript = _player.GetComponent<PlayerMovement>();
