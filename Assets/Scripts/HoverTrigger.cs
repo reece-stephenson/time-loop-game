@@ -5,21 +5,34 @@ using UnityEngine;
 public class HoverController : MonoBehaviour
 {
     [SerializeField]
-    private BuildingAreaLogicController buildingAreaLogicController;
+    private GameObject hoverArea;
+
+    [SerializeField]
+    private GameObject particles;
     void Start()
     {
-        
+
     }
 
 
     void Update()
     {
-        
+
     }
 
-    [ContextMenu("Hover")]
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        buildingAreaLogicController.enableHover(collision);
+
+        hoverArea.SetActive(true);
+        particles.SetActive(true);
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
+        hoverArea.SetActive(false);
+        particles.SetActive(false);
+    }
+
+
 }

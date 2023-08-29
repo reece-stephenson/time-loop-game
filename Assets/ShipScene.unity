@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 374325978}
   - component: {fileID: 374325980}
   - component: {fileID: 374325979}
+  - component: {fileID: 374325981}
   m_Layer: 0
   m_Name: TilemapBackground
   m_TagString: Untagged
@@ -9579,6 +9580,25 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &374325981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374325977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc051acc8d8dec34e9ed7f9c9961eef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemap: {fileID: 0}
+  _activatePaintTiles: []
+  _activateUnPaintTiles: []
+  _deactivatePaintTiles: []
+  _deactivateUnPaintTiles: []
+  _doorTile: {fileID: 0}
+  _rotation: 0
 --- !u!1001 &807813131
 PrefabInstance:
   m_ObjectHideFlags: 0
