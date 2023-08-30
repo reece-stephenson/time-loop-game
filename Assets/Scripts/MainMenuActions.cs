@@ -19,7 +19,7 @@ public class MainMenuActions : MonoBehaviour
 
     public void HighscoresButtonCLick()
     {
-        LeaderboardController.Instance.SubmitScore();
+
     }
 
     public async void QuitButtonClick()
@@ -55,5 +55,6 @@ public enum Scenes
     LEVEL2 = 2,
     LEVEL3 = 3,
     SHIP_SCENE = 4,
-    DEV_SCENE = 5
+    DEV_SCENE = 5,
+    FINAL_SCENE = 6
 }

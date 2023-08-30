@@ -27,6 +27,8 @@ public class LoopController : MonoBehaviour
     private float _startDelay = 15f;
     private bool _hasStarted = false;
 
+    public static int CloneCount { get; set; }
+
     private Vector2 _startPosition;
     public Vector2 StartPosition { get => _startPosition; }
 
@@ -91,6 +93,7 @@ public class LoopController : MonoBehaviour
 
     private void ResetAll()
     {
+        CloneCount++;
         _playingLoopImminent = false;
         LockReset = true;
 

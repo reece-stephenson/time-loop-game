@@ -69,24 +69,12 @@ public class LeaderboardController : MonoBehaviour
         Debug.Log("Started Leaderboard");
     }
 
-    public void SubmitScore()
+    public void SubmitScore(string name, int score, Action<LootLockerSubmitScoreResponse> callback)
     {
-        string displayName = "Test\n" + DateTime.Now;
-        int score = 69;
+        string displayName = name + "\n" + DateTime.Now;
         int leaderboardId = 17276;
 
-        LootLockerSDKManager.SubmitScore(displayName, score, leaderboardId, (response) =>
-        {
-            if (response.success)
-            {
-                Debug.Log("Inserted");
-            }
-            else
-            {
-                Debug.Log("Not inserted");
-                Debug.Log(response.Error);
-            }
-        });
+        LootLockerSDKManager.SubmitScore(displayName, score, leaderboardId, callback);
     }
 
     public void GetScores(Action<LootLockerGetScoreListResponse> callback)

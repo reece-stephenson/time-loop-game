@@ -3221,9 +3221,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.4, y: 0}
+  m_Offset: {x: -0.1, y: -0.5}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.56
 --- !u!212 &805174795
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3420,7 +3420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unloadScene: 1
-  _loadScene: 2
+  _loadScene: 6
 --- !u!1 &844889418
 GameObject:
   m_ObjectHideFlags: 0
@@ -5158,7 +5158,7 @@ MonoBehaviour:
   - {fileID: 768577307}
   _playerRigidBody: {fileID: 1976543317}
   buildingAreaLogicController: {fileID: 0}
-  _startDelay: 2
+  _startDelay: 15
   loopColours:
   - {r: 0.623899, g: 0.7830189, b: 0.36565503, a: 1}
   - {r: 0.78431374, g: 0.40882495, b: 0.36470586, a: 1}
@@ -6424,7 +6424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801070270056095146, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.83
+      value: -5.14
       objectReference: {fileID: 0}
     - target: {fileID: 8801070270056095146, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
       propertyPath: m_LocalPosition.z
