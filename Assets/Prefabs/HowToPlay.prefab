@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 6248602968037383735}
   - component: {fileID: 6351058404300415011}
   m_Layer: 5
-  m_Name: ButtonText (1)
+  m_Name: CloseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,12 +382,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Time Loop:
 
-    The time loop sends you back to the past, where past selves
-    of you will repeat exactly what they did. Be careful to interfere, as this can
-    cause time anomalies and prevent your past selves from completing what they had
-    originally done!
-
-'
+    Time loops send you back to the past so that your past
+    self can repeat itself while you solve the puzzle.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -655,10 +651,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\rButtons:\r\nButtons can open/close doors, raise/lower elevators etc.
-    Walk up to a button to activate it. If you want to deactivate it, use a time
-    loop and walk up to it again. This can be repeated over and over again to solve
-    challenges.\r\n"
+  m_text: "\rButtons:\r\nActivate buttons to manipulate elements like doors and elevators.
+    Use the time loop to deactivate and reactivate buttons, allowing you to solve
+    challenges by repeating actions.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
