@@ -18,6 +18,8 @@ public class LeaderboardController : MonoBehaviour
 
     void Start()
     {
+        MainMenuActions.PlayButtonIsEnabled = false;
+
         if (Instance == null)
         {
             Instance = this;
@@ -117,6 +119,8 @@ public class LeaderboardController : MonoBehaviour
                     scoreScript.Score = item.score.ToString();
 
                     targetVector = new Vector2(targetVector.x, targetVector.y + _yIncrement);
+
+                    MainMenuActions.PlayButtonIsEnabled = true;
                 }
             }
             else

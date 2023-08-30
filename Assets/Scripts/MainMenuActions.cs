@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuActions : MonoBehaviour
 {
+
+    public static bool PlayButtonIsEnabled { get; set; }
+
     public void PlayButtonClick()
     {
+        if (!PlayButtonIsEnabled) return;
+
         SceneManager.LoadScene((int)Scenes.LEVEL1);
         SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
         SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
