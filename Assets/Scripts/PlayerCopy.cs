@@ -16,7 +16,7 @@ public class PlayerCopy : MonoBehaviour
     private IEnumerator _animationEnumerator;
 
     public SpriteRenderer _spriteRenderer;
-    private Animator _animator;
+    public Animator _animator;
 
     public MovementState _movementState;
 
@@ -134,5 +134,10 @@ public class PlayerCopy : MonoBehaviour
 
         _animationEnumerator.Reset();
         _animationEnumerator.MoveNext();
+    }
+
+    public void KillPlayer()
+    {
+        IsDead = true;
     }
 }

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
     public SpriteRenderer _spriteRenderer;
-    private Animator _animator;
+    public Animator _animator;
     [SerializeField] private LayerMask _jumpableGround;
     public Rigidbody2D RigidBody { get => _rigidBody; }
 
@@ -194,5 +194,10 @@ public class PlayerMovement : MonoBehaviour
     public void ResetAnimation()
     {
         _animations.Clear();
+    }
+
+    public void KillPlayer()
+    {
+        IsDead = true;
     }
 }

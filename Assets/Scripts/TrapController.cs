@@ -56,7 +56,7 @@ public class TrapController : MonoBehaviour
             currentCell = new Vector3Int((int)trapPosition.x, (int)trapPosition.y);
             _tilemap.SetTile(currentCell, _tiles[trap.Tiles[i]]);
         }
-        
+
     }
 
     public void DeactivateTrap(Vector2 position)
@@ -93,7 +93,7 @@ public class TrapController : MonoBehaviour
         List<Vector2> trapPositions = new List<Vector2>();
         trapPositions.Add(trap.StartPosition);
 
-        for (int i=1; i< trap.Tiles.Length; i++)
+        for (int i = 1; i < trap.Tiles.Length; i++)
         {
             float x = trapPositions.LastOrDefault().x;
             float y = trapPositions.LastOrDefault().y;
@@ -133,11 +133,12 @@ public class TrapController : MonoBehaviour
         {
             try
             {
-                collision.gameObject.GetComponent<PlayerMovement>().IsDead = true;
+                collision.gameObject.GetComponent<PlayerMovement>().LockMovement = true;
+                collision.gameObject.GetComponent<PlayerMovement>()._animator.SetTrigger("deathTrigger");
             }
             catch
             {
-                collision.gameObject.GetComponent<PlayerCopy>().IsDead = true;
+                collision.gameObject.GetComponent<PlayerCopy>()._animator.SetTrigger("deathTrigger");
             }
 
             return;
@@ -147,11 +148,12 @@ public class TrapController : MonoBehaviour
         {
             try
             {
-                collision.gameObject.GetComponent<PlayerMovement>().IsDead = true;
+                collision.gameObject.GetComponent<PlayerMovement>().LockMovement = true;
+                collision.gameObject.GetComponent<PlayerMovement>()._animator.SetTrigger("deathTrigger");
             }
             catch
             {
-                collision.gameObject.GetComponent<PlayerCopy>().IsDead = true;
+                collision.gameObject.GetComponent<PlayerCopy>()._animator.SetTrigger("deathTrigger");
             }
         }
     }
