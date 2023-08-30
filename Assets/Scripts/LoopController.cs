@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoopController : MonoBehaviour
 {
+    private bool StopAll = false;
+
     [SerializeField]
     private float timeBetweenClones = 10f;
     private float elapsedTime = 0f;
@@ -29,7 +32,8 @@ public class LoopController : MonoBehaviour
 
     public static int CloneCount { get; set; }
 
-    private Vector2 _startPosition;
+    [SerializeField]
+    private Vector2 _startPosition = new Vector2(-44.23f, -5.14f);
     public Vector2 StartPosition { get => _startPosition; }
 
     private List<Collider2D> _copyPlayerColliders;
@@ -47,7 +51,6 @@ public class LoopController : MonoBehaviour
 
     void Start()
     {
-        _startPosition = _player.GetComponent<PlayerMovement>().RigidBody.position;
         _copyPlayerColliders = new List<Collider2D>();
         _playerCopies = new List<PlayerCopy>();
         _copyPlayers = new List<GameObject>();
@@ -57,6 +60,8 @@ public class LoopController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (StopAll) return;
+
         elapsedTime += Time.fixedDeltaTime;
 
         if (elapsedTime < _startDelay && !_hasStarted)
@@ -71,7 +76,6 @@ public class LoopController : MonoBehaviour
 
         if (elapsedTime >= timeBetweenClones - 5f && !_playingLoopImminent)
         {
-            Debug.Log(elapsedTime);
             _playingLoopImminent = true;
             _audioSOurceLoopImminent.Play();
         }

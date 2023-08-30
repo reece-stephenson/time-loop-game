@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/FinalScene.unity
     guid: 0ed9616fa3c5dec409c680f57d50c99f
+  - enabled: 1
+    path: Assets/Intermediate.unity
+    guid: 2fc41946f8495f54b84e568ebbcc2e31
   m_configObjects: {}
