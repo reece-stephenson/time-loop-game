@@ -7,6 +7,9 @@ public class LevelRestart : MonoBehaviour
 {
     private static bool _hasRestarted;
 
+    [SerializeField]
+    private int _levelScene;
+
     private void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerCopy : MonoBehaviour
@@ -20,8 +19,7 @@ public class PlayerCopy : MonoBehaviour
 
     public MovementState _movementState;
 
-    [SerializeField]
-    private float _distanceThreshold = 1f;
+    public float DistanceThreshold { get; set; } = 2f;
 
     private bool _resetDistance = false;
 
@@ -48,7 +46,7 @@ public class PlayerCopy : MonoBehaviour
         }
         else
         {
-            if (Vector2.Distance(_rigidBody.position, ((MovementPair)_enumerator.Current).Position) > _distanceThreshold && !_resetDistance)
+            if (Vector2.Distance(_rigidBody.position, ((MovementPair)_enumerator.Current).Position) > DistanceThreshold && !_resetDistance)
             {
                 return;
             }

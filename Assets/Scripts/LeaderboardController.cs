@@ -72,9 +72,10 @@ public class LeaderboardController : MonoBehaviour
     public void SubmitScore(string name, int score, Action<LootLockerSubmitScoreResponse> callback)
     {
         string displayName = name + "\n" + DateTime.Now;
-        int leaderboardId = 17276;
+        string lKey = "prod-leaderboard";
+        int leaderboardId = 17292;
 
-        LootLockerSDKManager.SubmitScore(displayName, score, leaderboardId, callback);
+        LootLockerSDKManager.SubmitScore(displayName, score, lKey, callback);
     }
 
     public void GetScores(Action<LootLockerGetScoreListResponse> callback)
@@ -87,10 +88,11 @@ public class LeaderboardController : MonoBehaviour
 
     public void GetScores()
     {
-        int leaderboardId = 17276;
+        int leaderboardId = 17292;
+        string lKey = "prod-leaderboard";
         int count = 10;
 
-        LootLockerSDKManager.GetScoreList(leaderboardId, count, (response) =>
+        LootLockerSDKManager.GetScoreList(lKey, count, (response) =>
         {
             if (response.success )
             {
