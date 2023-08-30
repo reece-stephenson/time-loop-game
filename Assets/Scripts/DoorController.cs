@@ -27,18 +27,30 @@ public class DoorController : MonoBehaviour
     [SerializeField]
     private float _rotation = 0;
 
+    [SerializeField]
+    private Sprite _btnOffSprite;
+
+    [SerializeField]
+    private Sprite _btnOnSprite;
+
+    private SpriteRenderer _spriteRenderer;
+
     private int _collisionCount = 0;
     private AudioSource _audioSource;
 
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void Activate()
     {
 
         _audioSource.Play();
+
+        if (_btnOnSprite != null)
+            _spriteRenderer.sprite = _btnOnSprite;
 
         foreach (var tile in _activatePaintTiles)
         {
@@ -59,6 +71,9 @@ public class DoorController : MonoBehaviour
     {
 
         _audioSource.Play();
+
+        if (_btnOffSprite != null)
+            _spriteRenderer.sprite = _btnOffSprite;
 
         foreach (var tile in _deactivatePaintTiles)
         {

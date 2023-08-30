@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMovement)
         {
-            Debug.Log("Not moving A");
+            //Debug.Log("Not moving A");
             return;
         }
 
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (IsDead)
         {
-            Debug.Log("Not moving B");
+           // Debug.Log("Not moving B");
             movementDirection = 0f;
             UpdateAnimationState();
             _movements.Enqueue(new MovementPair

@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuActions : MonoBehaviour
 {
+
+    public static bool PlayButtonIsEnabled { get; set; }
+
     public void PlayButtonClick()
     {
+        if (!PlayButtonIsEnabled) return;
+
         SceneManager.LoadScene((int)Scenes.LEVEL1);
         SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
         SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
@@ -14,7 +19,7 @@ public class MainMenuActions : MonoBehaviour
 
     public void HighscoresButtonCLick()
     {
-        LeaderboardController.Instance.SubmitScore();
+
     }
 
     public async void QuitButtonClick()
@@ -50,5 +55,6 @@ public enum Scenes
     LEVEL2 = 2,
     LEVEL3 = 3,
     SHIP_SCENE = 4,
-    DEV_SCENE = 5
+    DEV_SCENE = 5,
+    FINAL_SCENE = 6
 }
