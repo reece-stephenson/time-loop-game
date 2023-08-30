@@ -6,6 +6,8 @@ TagManager:
   tags:
   - GravityButton
   - Canvas
+  - CarryingObject
+  - CarryingMagnet
   layers:
   - Default
   - TransparentFX
