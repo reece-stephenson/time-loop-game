@@ -36,6 +36,9 @@ public class LoopController : MonoBehaviour
     private Vector2 _startPosition = new Vector2(-44.23f, -5.14f);
     public Vector2 StartPosition { get => _startPosition; }
 
+    [SerializeField]
+    private float _distanceThreshold;
+
     private List<Collider2D> _copyPlayerColliders;
     private List<PlayerCopy> _playerCopies;
 
@@ -111,6 +114,7 @@ public class LoopController : MonoBehaviour
 
         var newCopy = Instantiate(_playerCopyPrefab, _startPosition, Quaternion.identity);
         var playerCopyScript = newCopy.GetComponent<PlayerCopy>();
+        playerCopyScript.DistanceThreshold = _distanceThreshold;
         Physics2D.IgnoreCollision(_player.GetComponent<Collider2D>(), newCopy.GetComponent<Collider2D>());
 
         foreach (var cp in _copyPlayers)

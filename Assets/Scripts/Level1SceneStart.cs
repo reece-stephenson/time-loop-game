@@ -14,10 +14,13 @@ public class Level1SceneStart : MonoBehaviour
     [SerializeField]
     private GameObject _player;
 
+    [SerializeField]
+    private int _levelScene;
+
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(_levelScene));
     }
 
     private void OnGUI()
