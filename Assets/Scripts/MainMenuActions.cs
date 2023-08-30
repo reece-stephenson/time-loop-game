@@ -50,7 +50,7 @@ public class MainMenuActions : MonoBehaviour
 
 public enum Scenes
 {
-    MAIN_MENU = 0,
+    MAIN_MENU = 7,
     LEVEL1 = 1,
     LEVEL2 = 2,
     LEVEL3 = 3,

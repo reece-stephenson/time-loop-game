@@ -21,10 +21,20 @@ public class IntermediateScene : MonoBehaviour
     {
         _current += Time.deltaTime;
 
-        if (_current >= _duration)
+        //if (_current >= _duration)
+        //{
+        //    SceneManager.LoadScene(1);
+        //    SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
+        //    SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
+        //}
+    }
+
+    private void OnGUI()
+    {
+        if (Input.GetMouseButtonDown(0) && _current >= _duration)
         {
-            SceneManager.LoadScene(1);
-            SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
+            SceneManager.LoadScene((int)Scenes.MAIN_MENU);
+            //SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
             SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
         }
     }
