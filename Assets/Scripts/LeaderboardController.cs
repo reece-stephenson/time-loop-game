@@ -25,27 +25,29 @@ public class LeaderboardController : MonoBehaviour
             Instance = this;
             Instance._scorePrefab = Resources.Load<HighscoreItem>("HighscoreItem");
             DontDestroyOnLoad(gameObject);
+
+            LootLockerSDKManager.StartGuestSession((response) =>
+            {
+                if (response.success)
+                {
+                    Instance.HasStarted = true;
+                    Debug.Log("Leaderboard successfully conncted");
+                    Instance.GetScores();
+                }
+                else
+                {
+                    Debug.Log("Not connected");
+                    Debug.Log(response.Error);
+                }
+            });
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
         }
 
-        if (!Instance.HasStarted)
-        LootLockerSDKManager.StartGuestSession((response) =>
-        {
-            if (response.success)
-            {
-                Instance.HasStarted = true;
-                Debug.Log("Leaderboard successfully conncted");
-                Instance.GetScores();
-            }
-            else
-            {
-                Debug.Log("Not connected");
-                Debug.Log(response.Error);
-            }
-        });
+        //if (!Instance.HasStarted)
+        
     }
 
     public void StartAll()
