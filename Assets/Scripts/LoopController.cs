@@ -71,7 +71,7 @@ public class LoopController : MonoBehaviour
             _audioSOurceLoopImminent.Play();
         }
 
-        if (elapsedTime >= timeBetweenClones)
+        if (elapsedTime >= timeBetweenClones && !LockReset)
         {
             ResetAll();
         }
