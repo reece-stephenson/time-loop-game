@@ -43,9 +43,6 @@ public class LoopController : MonoBehaviour
 
     private bool LockReset = false;
 
-    [SerializeField] Color[] loopColours;
-    private int currentColorIndex = 0;
-
     private AudioSource _audioSOurceLoopImminent;
     private bool _playingLoopImminent = false;
 
@@ -81,6 +78,12 @@ public class LoopController : MonoBehaviour
         }
 
         if (elapsedTime >= timeBetweenClones && !LockReset)
+        {
+            ResetAll();
+        }
+
+        var playerMovement = _player.GetComponent<PlayerMovement>();
+        if (playerMovement.IsDead && !LockReset)
         {
             ResetAll();
         }
@@ -122,19 +125,22 @@ public class LoopController : MonoBehaviour
 
         _copyPlayers.Add(newCopy);
 
-        if (currentColorIndex == loopColours.Length - 1)
+        // Randomising the colour of the player and clone
+        Color prevColour = playerScript._spriteRenderer.color;
+        Color newColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
+        while (newColour == prevColour)
         {
-            currentColorIndex = 0;
+            newColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         }
 
-        playerScript._spriteRenderer.color = loopColours[currentColorIndex + 1];
+        playerScript._spriteRenderer.color = newColour;
 
-        Color copySpriteColor = loopColours[currentColorIndex];
-        copySpriteColor.a = 0.3f;
+        Color copySpriteColour = prevColour;
+        copySpriteColour.a = 0.3f;
 
-        playerCopyScript._spriteRenderer.color = copySpriteColor;
+        playerCopyScript._spriteRenderer.color = copySpriteColour;
 
-        currentColorIndex++;       
 
         playerCopyScript.startPosition = _startPosition;
         playerCopyScript._movements = GetDeepCopy(playerScript._movements);
