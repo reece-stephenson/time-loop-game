@@ -21,7 +21,7 @@ public class Level1SceneStart : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(_levelScene));
-        //_audioSource.Play();
+        _audioSource.Play();
     }
 
     private void OnGUI()

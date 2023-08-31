@@ -371,51 +371,6 @@ MonoBehaviour:
   _rotation: 0
   _btnOffSprite: {fileID: 452875931, guid: 8c473321713a3fa4ebec0a6243dcb0a1, type: 3}
   _btnOnSprite: {fileID: 1192445050, guid: 8c473321713a3fa4ebec0a6243dcb0a1, type: 3}
---- !u!1 &95331090
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 95331091}
-  - component: {fileID: 95331092}
-  m_Layer: 0
-  m_Name: PauseMenuController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &95331091
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95331090}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.05128, y: 3.3583672, z: -0.088822216}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &95331092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95331090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8fe7b652733164a8d2c812432aa2ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pauseMenuPrefab: {fileID: 2091696127880135248, guid: e2bbd2294c7359245adfd59084b047b8, type: 3}
 --- !u!1001 &98446049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6545,11 +6500,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8801070270056095146, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.23
+      value: -20.88
       objectReference: {fileID: 0}
     - target: {fileID: 8801070270056095146, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.14
+      value: 5.02
       objectReference: {fileID: 0}
     - target: {fileID: 8801070270056095146, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8704,4 +8659,3 @@ SceneRoots:
   - {fileID: 844889419}
   - {fileID: 1976543315}
   - {fileID: 746745602}
-  - {fileID: 95331091}
