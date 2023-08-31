@@ -22,28 +22,10 @@ public class MainMenuActions : MonoBehaviour
 
     }
 
-    public async void QuitButtonClick()
+    public void QuitButtonClick()
     {
-        LeaderboardController.Instance.GetScores((response) =>
-        {
-            if (response.success)
-            {
-                Debug.Log("fetched");
-                Debug.Log(response.items.Length);
-
-                foreach (var item in response.items)
-                {
-                    Debug.Log(item.member_id);
-                }
-            }
-            else
-            {
-                Debug.Log("Not fetched");
-                Debug.Log(response.Error);
-            }
-        });
-
-        
+        Debug.Log("Quiting");
+        Application.Quit();
     }
 
 }

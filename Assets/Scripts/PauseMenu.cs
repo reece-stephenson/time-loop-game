@@ -18,6 +18,10 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         AudioListener.pause = false;
         LevelRestart.IsPaused = false;
+
+        if (SceneManager.GetActiveScene().buildIndex == 6)
+            return;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
         SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
@@ -30,5 +34,6 @@ public class PauseMenu : MonoBehaviour
         LevelRestart.IsPaused = false;
         SceneManager.LoadScene((int)Scenes.MAIN_MENU);
         SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
+        LeaderboardController.Instance.GetScores();
     }
 }
