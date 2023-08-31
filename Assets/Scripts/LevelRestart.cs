@@ -5,25 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class LevelRestart : MonoBehaviour
 {
-    private static bool _hasRestarted;
-
     [SerializeField]
-    private int _levelScene;
+    private GameObject _pauseMenuPrefab;
 
-    private void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
-        SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
-    }
+    public static bool IsPaused { get; set; }
 
     private void OnGUI()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) && !_hasRestarted)
+        if (Input.GetKeyUp(KeyCode.Escape) && !IsPaused)
         {
-            _hasRestarted = true;
-            Debug.Log("restarting level");
-            RestartLevel();
+            Time.timeScale = 0f;
+            AudioListener.pause = true;
+            IsPaused = true;
+            Instantiate(_pauseMenuPrefab);
         }
     }
 }
