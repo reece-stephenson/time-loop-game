@@ -110,6 +110,7 @@ public class LoopController : MonoBehaviour
         var playerScript = _player.GetComponent<PlayerMovement>();
 
         playerScript.LockMovement = true;
+        playerScript._animator.SetTrigger("loopTrigger");
         playerScript.RigidBody.position = _startPosition;
 
         var newCopy = Instantiate(_playerCopyPrefab, _startPosition, Quaternion.identity);
@@ -122,6 +123,10 @@ public class LoopController : MonoBehaviour
             var collider = cp.GetComponent<Collider2D>();
             var script = cp.GetComponent<PlayerCopy>();
 
+            if(cp.GetComponent<PlayerCopy>().IsDead)
+            {
+                cp.GetComponent<PlayerCopy>()._animator.SetInteger("state", (int)MovementState.idle);
+            }
 
             Physics2D.IgnoreCollision(collider, newCopy.GetComponent<Collider2D>());
             script.ResetMovement(_startPosition);
@@ -129,19 +134,19 @@ public class LoopController : MonoBehaviour
 
         _copyPlayers.Add(newCopy);
 
-        // Randomising the colour of the player and clone
-        Color prevColour = playerScript._spriteRenderer.color;
-        Color newColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        // // Randomising the colour of the player and clone
+        // Color prevColour = playerScript._spriteRenderer.color;
+        // Color newColour = 
 
-        while (newColour == prevColour)
-        {
-            newColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        }
+        // while (newColour == prevColour)
+        // {
+        //     newColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        // }
 
-        playerScript._spriteRenderer.color = newColour;
+        // playerScript._spriteRenderer.color = newColour;
 
-        Color copySpriteColour = prevColour;
-        copySpriteColour.a = 0.3f;
+        Color copySpriteColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);;
+        copySpriteColour.a = 0.5f;
 
         playerCopyScript._spriteRenderer.color = copySpriteColour;
 
