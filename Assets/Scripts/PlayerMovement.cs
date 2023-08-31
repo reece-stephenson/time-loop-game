@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _rigidBody;
     public SpriteRenderer _spriteRenderer;
-    private Animator _animator;
+    public Animator _animator;
     [SerializeField] private LayerMask _jumpableGround;
     public Rigidbody2D RigidBody { get => _rigidBody; }
 
@@ -34,8 +34,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isGravityFlipped;
 
+    private PlayerAudioPlayer _playerAudioPlayer;
+
     void Start()
     {
+        _playerAudioPlayer = GetComponent<PlayerAudioPlayer>();
         _rigidBody = GetComponent<Rigidbody2D>();
         _movements = new Queue<MovementPair>();
         _animations = new Queue<CommonAnimationState>();
@@ -49,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LockMovement)
         {
-            Debug.Log("Not moving A");
+            //Debug.Log("Not moving A");
             return;
         }
 
@@ -65,10 +68,10 @@ public class PlayerMovement : MonoBehaviour
             transform.eulerAngles = Vector3.zero;
             movementDirection = Input.GetAxisRaw("Horizontal");
         }
-        
+
         if (IsDead)
         {
-            Debug.Log("Not moving B");
+            // Debug.Log("Not moving B");
             movementDirection = 0f;
             UpdateAnimationState();
             _movements.Enqueue(new MovementPair
@@ -83,7 +86,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey("space") && IsGrounded())
         {
-            if(!isGravityFlipped)
+
+            _playerAudioPlayer.PlayJumpSound();
+            if (!isGravityFlipped)
             {
                 yVelocity = _jumpHeight;
             }
@@ -145,21 +150,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (_rigidBody.velocity.y > .1f)
         {
-            if(!isGravityFlipped)
+            if (!isGravityFlipped)
             {
-                _movementState = MovementState.jumping;  
+                _movementState = MovementState.jumping;
             }
             else
             {
                 _movementState = MovementState.falling;
             }
-            
+
         }
         else if (_rigidBody.velocity.y < -.1f)
         {
-            if(!isGravityFlipped)
+            if (!isGravityFlipped)
             {
-                _movementState = MovementState.falling;  
+                _movementState = MovementState.falling;
             }
             else
             {
@@ -194,5 +199,20 @@ public class PlayerMovement : MonoBehaviour
     public void ResetAnimation()
     {
         _animations.Clear();
+    }
+
+    public void PlayDeathSound()
+    {
+        _playerAudioPlayer.PlayDeathSound();
+    }
+
+    public void PlayLoopSound()
+    {
+        _playerAudioPlayer.PlayLoopSound();
+    }
+
+    public void KillPlayer()
+    {
+        IsDead = true;
     }
 }

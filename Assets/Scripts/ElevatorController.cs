@@ -23,10 +23,19 @@ public class ElevatorController : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    [SerializeField]
+    private Sprite _btnOffSprite;
+
+    [SerializeField]
+    private Sprite _btnOnSprite;
+
+    private SpriteRenderer _spriteRenderer;
+
     void Start()
     {
         _target = _startPosition;
         _audioSource = GetComponent<AudioSource>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -38,12 +47,18 @@ public class ElevatorController : MonoBehaviour
     {
         _audioSource.Play();
         _target = _endPosition;
+
+        if (_btnOnSprite != null)
+            _spriteRenderer.sprite = _btnOnSprite;
     }
 
     public void Deactivate()
     {
         _audioSource.Play();
         _target = _startPosition;
+
+        if (_btnOffSprite != null)
+            _spriteRenderer.sprite = _btnOffSprite;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

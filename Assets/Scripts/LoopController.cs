@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoopController : MonoBehaviour
 {
+    private bool StopAll = false;
+
     [SerializeField]
     private float timeBetweenClones = 10f;
     private float elapsedTime = 0f;
@@ -27,8 +30,14 @@ public class LoopController : MonoBehaviour
     private float _startDelay = 15f;
     private bool _hasStarted = false;
 
-    private Vector2 _startPosition;
+    public static int CloneCount { get; set; }
+
+    [SerializeField]
+    private Vector2 _startPosition = new Vector2(-44.23f, -5.14f);
     public Vector2 StartPosition { get => _startPosition; }
+
+    [SerializeField]
+    private float _distanceThreshold;
 
     private List<Collider2D> _copyPlayerColliders;
     private List<PlayerCopy> _playerCopies;
@@ -37,15 +46,11 @@ public class LoopController : MonoBehaviour
 
     private bool LockReset = false;
 
-    [SerializeField] Color[] loopColours;
-    private int currentColorIndex = 0;
-
     private AudioSource _audioSOurceLoopImminent;
     private bool _playingLoopImminent = false;
 
     void Start()
     {
-        _startPosition = _player.GetComponent<PlayerMovement>().RigidBody.position;
         _copyPlayerColliders = new List<Collider2D>();
         _playerCopies = new List<PlayerCopy>();
         _copyPlayers = new List<GameObject>();
@@ -55,6 +60,8 @@ public class LoopController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (StopAll) return;
+
         elapsedTime += Time.fixedDeltaTime;
 
         if (elapsedTime < _startDelay && !_hasStarted)
@@ -69,12 +76,17 @@ public class LoopController : MonoBehaviour
 
         if (elapsedTime >= timeBetweenClones - 5f && !_playingLoopImminent)
         {
-            Debug.Log(elapsedTime);
             _playingLoopImminent = true;
             _audioSOurceLoopImminent.Play();
         }
 
         if (elapsedTime >= timeBetweenClones && !LockReset)
+        {
+            ResetAll();
+        }
+
+        var playerMovement = _player.GetComponent<PlayerMovement>();
+        if (playerMovement.IsDead && !LockReset)
         {
             ResetAll();
         }
@@ -91,16 +103,19 @@ public class LoopController : MonoBehaviour
 
     private void ResetAll()
     {
+        CloneCount++;
         _playingLoopImminent = false;
         LockReset = true;
 
         var playerScript = _player.GetComponent<PlayerMovement>();
 
         playerScript.LockMovement = true;
+        playerScript._animator.SetTrigger("loopTrigger");
         playerScript.RigidBody.position = _startPosition;
 
         var newCopy = Instantiate(_playerCopyPrefab, _startPosition, Quaternion.identity);
         var playerCopyScript = newCopy.GetComponent<PlayerCopy>();
+        playerCopyScript.DistanceThreshold = _distanceThreshold;
         Physics2D.IgnoreCollision(_player.GetComponent<Collider2D>(), newCopy.GetComponent<Collider2D>());
 
         foreach (var cp in _copyPlayers)
@@ -108,6 +123,10 @@ public class LoopController : MonoBehaviour
             var collider = cp.GetComponent<Collider2D>();
             var script = cp.GetComponent<PlayerCopy>();
 
+            if(cp.GetComponent<PlayerCopy>().IsDead)
+            {
+                cp.GetComponent<PlayerCopy>()._animator.SetInteger("state", (int)MovementState.idle);
+            }
 
             Physics2D.IgnoreCollision(collider, newCopy.GetComponent<Collider2D>());
             script.ResetMovement(_startPosition);
@@ -115,19 +134,22 @@ public class LoopController : MonoBehaviour
 
         _copyPlayers.Add(newCopy);
 
-        if (currentColorIndex == loopColours.Length - 1)
-        {
-            currentColorIndex = 0;
-        }
+        // // Randomising the colour of the player and clone
+        // Color prevColour = playerScript._spriteRenderer.color;
+        // Color newColour = 
 
-        playerScript._spriteRenderer.color = loopColours[currentColorIndex + 1];
+        // while (newColour == prevColour)
+        // {
+        //     newColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        // }
 
-        Color copySpriteColor = loopColours[currentColorIndex];
-        copySpriteColor.a = 0.3f;
+        // playerScript._spriteRenderer.color = newColour;
 
-        playerCopyScript._spriteRenderer.color = copySpriteColor;
+        Color copySpriteColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);;
+        copySpriteColour.a = 0.5f;
 
-        currentColorIndex++;       
+        playerCopyScript._spriteRenderer.color = copySpriteColour;
+
 
         playerCopyScript.startPosition = _startPosition;
         playerCopyScript._movements = GetDeepCopy(playerScript._movements);

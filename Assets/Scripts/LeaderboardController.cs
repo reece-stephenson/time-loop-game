@@ -18,32 +18,36 @@ public class LeaderboardController : MonoBehaviour
 
     void Start()
     {
+        MainMenuActions.PlayButtonIsEnabled = false;
+
         if (Instance == null)
         {
             Instance = this;
             Instance._scorePrefab = Resources.Load<HighscoreItem>("HighscoreItem");
             DontDestroyOnLoad(gameObject);
+
+            LootLockerSDKManager.StartGuestSession((response) =>
+            {
+                if (response.success)
+                {
+                    Instance.HasStarted = true;
+                    Debug.Log("Leaderboard successfully conncted");
+                    Instance.GetScores();
+                }
+                else
+                {
+                    Debug.Log("Not connected");
+                    Debug.Log(response.Error);
+                }
+            });
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
         }
 
-        if (!Instance.HasStarted)
-        LootLockerSDKManager.StartGuestSession((response) =>
-        {
-            if (response.success)
-            {
-                Instance.HasStarted = true;
-                Debug.Log("Leaderboard successfully conncted");
-                Instance.GetScores();
-            }
-            else
-            {
-                Debug.Log("Not connected");
-                Debug.Log(response.Error);
-            }
-        });
+        //if (!Instance.HasStarted)
+        
     }
 
     public void StartAll()
@@ -65,24 +69,13 @@ public class LeaderboardController : MonoBehaviour
         Debug.Log("Started Leaderboard");
     }
 
-    public void SubmitScore()
+    public void SubmitScore(string name, int score, Action<LootLockerSubmitScoreResponse> callback)
     {
-        string displayName = "Test\n" + DateTime.Now;
-        int score = 69;
-        int leaderboardId = 17276;
+        string displayName = name + "\n" + DateTime.Now;
+        string lKey = "prod-leaderboard";
+        int leaderboardId = 17292;
 
-        LootLockerSDKManager.SubmitScore(displayName, score, leaderboardId, (response) =>
-        {
-            if (response.success)
-            {
-                Debug.Log("Inserted");
-            }
-            else
-            {
-                Debug.Log("Not inserted");
-                Debug.Log(response.Error);
-            }
-        });
+        LootLockerSDKManager.SubmitScore(displayName, score, lKey, callback);
     }
 
     public void GetScores(Action<LootLockerGetScoreListResponse> callback)
@@ -95,10 +88,11 @@ public class LeaderboardController : MonoBehaviour
 
     public void GetScores()
     {
-        int leaderboardId = 17276;
+        int leaderboardId = 17292;
+        string lKey = "prod-leaderboard";
         int count = 10;
 
-        LootLockerSDKManager.GetScoreList(leaderboardId, count, (response) =>
+        LootLockerSDKManager.GetScoreList(lKey, count, (response) =>
         {
             if (response.success )
             {
@@ -117,6 +111,8 @@ public class LeaderboardController : MonoBehaviour
                     scoreScript.Score = item.score.ToString();
 
                     targetVector = new Vector2(targetVector.x, targetVector.y + _yIncrement);
+
+                    MainMenuActions.PlayButtonIsEnabled = true;
                 }
             }
             else
