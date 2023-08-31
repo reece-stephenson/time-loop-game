@@ -134,6 +134,11 @@ public class PlayerCopy : MonoBehaviour
         _animationEnumerator.MoveNext();
     }
 
+    public void PlayDeathSound()
+    {
+        return;
+    }
+
     public void KillPlayer()
     {
         IsDead = true;
