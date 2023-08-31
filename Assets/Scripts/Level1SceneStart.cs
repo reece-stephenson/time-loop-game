@@ -21,16 +21,11 @@ public class Level1SceneStart : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(_levelScene));
+        //_audioSource.Play();
     }
 
     private void OnGUI()
     {
-        //if (Input.GetMouseButtonDown(0) && !_hasPlayed)
-        //{
-        //    _hasPlayed = true;
-        //    _audioSource.Play();
-        //}
-
         if (Input.GetKeyDown(KeyCode.H) && _player.GetComponent<PlayerMovement>().LockMovement == false && !HowToPlay.LockInstantiation)
         {
             Debug.Log("Created help");
