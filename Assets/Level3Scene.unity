@@ -2271,7 +2271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8c33ccd350a294e99027d517711ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _howToPlayPrefab: {fileID: 9008434129606780276, guid: 8c029ecadf2ba1e408c205323dcc59c0, type: 3}
+  _howToPlayPrefab: {fileID: 9008434129606780276, guid: 31d1eee05d34a65419a93ff5c5e2e095, type: 3}
   _player: {fileID: 3433785796787202224, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
   _levelScene: 3
 --- !u!82 &465215873
@@ -2284,7 +2284,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2d3c40b228b6c5d4f9dd78c783631704, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3802,7 +3802,7 @@ MonoBehaviour:
   - {fileID: 1335956119}
   _playerRigidBody: {fileID: 1272491234}
   buildingAreaLogicController: {fileID: 255048241}
-  _startDelay: 0
+  _startDelay: 5
   _startPosition: {x: 3.93, y: -0.26}
   _distanceThreshold: 5
   _unpaintTiles: []
