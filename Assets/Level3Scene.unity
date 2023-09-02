@@ -835,6 +835,7 @@ GameObject:
   - component: {fileID: 84647917}
   - component: {fileID: 84647918}
   - component: {fileID: 84647919}
+  - component: {fileID: 84647920}
   m_Layer: 0
   m_Name: DoorButton
   m_TagString: Untagged
@@ -1088,6 +1089,56 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &84647920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84647913}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.6
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 0000000085fbd673119a77c5d511db18c10ccfb5d39cc5a1
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: -0.20945, y: -0.018249989, z: 0}
+    m_Extent: {x: 1.63645, y: 1.85595, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 1.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.34838867, y: -0.37726402, z: 0}
+  - {x: -0.06314087, y: -0.3808732, z: 0}
+  - {x: -0.07036209, y: 0.34477472, z: 0}
+  - {x: -0.333683, y: 0.34499645, z: 0}
 --- !u!1 &199165792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,6 +1505,7 @@ GameObject:
   - component: {fileID: 228216671}
   - component: {fileID: 228216669}
   - component: {fileID: 228216673}
+  - component: {fileID: 228216674}
   m_Layer: 0
   m_Name: ElevatorBtn1
   m_TagString: Untagged
@@ -1677,6 +1729,56 @@ MonoBehaviour:
   _moveSpeed: 2
   _btnOffSprite: {fileID: 452875931, guid: 8c473321713a3fa4ebec0a6243dcb0a1, type: 3}
   _btnOnSprite: {fileID: 1192445050, guid: 8c473321713a3fa4ebec0a6243dcb0a1, type: 3}
+--- !u!114 &228216674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228216667}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.6
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 0000000085fbd673119a77c5d511db18c10ccfb5d39cc5a1
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: -0.2051, y: -0.015900016, z: 0}
+    m_Extent: {x: 1.6354, y: 1.8677, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 1.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.34838867, y: -0.37726402, z: 0}
+  - {x: -0.06314087, y: -0.3808732, z: 0}
+  - {x: -0.07036209, y: 0.34477472, z: 0}
+  - {x: -0.333683, y: 0.34499645, z: 0}
 --- !u!1 &255048240
 GameObject:
   m_ObjectHideFlags: 0
@@ -6451,8 +6553,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.012050033, y: 0.036499992, z: 0}
-    m_Extent: {x: 1.14685, y: 0.503, z: 0}
+    m_Center: {x: 0.0069000125, y: 0.031200007, z: 0}
+    m_Extent: {x: 1.1438999, y: 0.5005, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -9761,6 +9863,7 @@ GameObject:
   - component: {fileID: 1683486648}
   - component: {fileID: 1683486649}
   - component: {fileID: 1683486650}
+  - component: {fileID: 1683486651}
   m_Layer: 0
   m_Name: DoorButton2
   m_TagString: Untagged
@@ -10055,6 +10158,56 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1683486651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683486643}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.6
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 0000000085fbd673119a77c5d511db18c10ccfb5d39cc5a1
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: -0.20245004, y: -0.018750012, z: 0}
+    m_Extent: {x: 1.63985, y: 1.86625, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 1.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.34838867, y: -0.37726402, z: 0}
+  - {x: -0.06314087, y: -0.3808732, z: 0}
+  - {x: -0.07036209, y: 0.34477472, z: 0}
+  - {x: -0.333683, y: 0.34499645, z: 0}
 --- !u!1 &1707214101
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Rendering.Universal;
 
 public class DoorController : MonoBehaviour
 {
@@ -32,16 +33,20 @@ public class DoorController : MonoBehaviour
 
     [SerializeField]
     private Sprite _btnOnSprite;
+    
+    private Light2D _light;
 
     private SpriteRenderer _spriteRenderer;
 
     private int _collisionCount = 0;
     private AudioSource _audioSource;
 
+
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _light = GetComponent<Light2D>();
     }
 
     public void Activate()
@@ -50,7 +55,10 @@ public class DoorController : MonoBehaviour
         _audioSource.Play();
 
         if (_btnOnSprite != null)
+        {
             _spriteRenderer.sprite = _btnOnSprite;
+            _light.enabled = true;
+        }
 
         foreach (var tile in _activatePaintTiles)
         {
@@ -73,7 +81,10 @@ public class DoorController : MonoBehaviour
         _audioSource.Play();
 
         if (_btnOffSprite != null)
+        {
             _spriteRenderer.sprite = _btnOffSprite;
+            _light.enabled = false;
+        }
 
         foreach (var tile in _deactivatePaintTiles)
         {
