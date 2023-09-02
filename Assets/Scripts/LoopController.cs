@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -62,6 +63,12 @@ public class LoopController : MonoBehaviour
     [SerializeField]
     private Tilemap _unpaintTilemap;
 
+    [SerializeField]
+    private Sprite _openCryoSprite;
+
+    [SerializeField]
+    private GameObject _croyPod;
+
     void Start()
     {
         _copyPlayerColliders = new List<Collider2D>();
@@ -82,6 +89,14 @@ public class LoopController : MonoBehaviour
 
         if (!_hasStarted)
         {
+
+            if (_croyPod != null)
+            {
+                _croyPod.GetComponent<SpriteRenderer>().sprite = _openCryoSprite;
+                var pcolor = _player.GetComponent<SpriteRenderer>();
+                pcolor.color = new Color(255, 255, 255, 255);
+            }
+
             _player.GetComponent<PlayerMovement>().LockMovement = false;
             _hasStarted = true;
             elapsedTime = 0;
