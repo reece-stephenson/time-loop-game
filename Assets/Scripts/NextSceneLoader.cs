@@ -15,5 +15,8 @@ public class NextSceneLoader : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync(_unloadScene);
         SceneManager.LoadScene(_loadScene, LoadSceneMode.Additive);
+
+        if (_unloadScene == (int)Scenes.LEVEL3)
+            SceneManager.LoadScene(8, LoadSceneMode.Additive);
     }
 }

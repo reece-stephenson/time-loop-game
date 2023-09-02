@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -32,9 +33,12 @@ public class pickupObjectController : MonoBehaviour
     [SerializeField]
     private Tile[] _paintTile;
 
+    private Quaternion _startRotation;
+
     void Start()
     {
         _startPosition = transform.position;
+        _startRotation = transform.rotation;
 
         _buildingTablePosition = new Vector2(18.8f, -8.5f);
 
@@ -42,7 +46,8 @@ public class pickupObjectController : MonoBehaviour
         _isPickedUp = false;
 
     }
-    void Update()
+
+    void FixedUpdate()
     {
 
         Vector2 _currPos = transform.position;
@@ -52,6 +57,8 @@ public class pickupObjectController : MonoBehaviour
         {
             if (!_isPlaced)
                 _placedCount++;
+            
+            transform.rotation = _startRotation;
 
             transform.position = _positionToBePlaced;
             _isPlaced = true;
@@ -68,17 +75,20 @@ public class pickupObjectController : MonoBehaviour
 
             return;
         }
-
-        if (_isPickedUp && !_isPlaced)
+        else if (_isPickedUp && !_isPlaced)
         {
             Vector3 _playerPos = _player.transform.position;
             transform.position = new Vector2(_playerPos.x, _playerPos.y - 0.1f);
+        }
+        else if (!_isPlaced)
+        {
+            transform.Rotate(0f, 40f * Time.deltaTime, 0f, Space.World);
         }
     }
 
     public void pickUpObject(Collider2D collision)
     {
-        if(_isMagnetic && !collision.gameObject.tag.Equals("CarryingMagnet"))
+        if (_isMagnetic && !collision.gameObject.tag.Equals("CarryingMagnet"))
         {
             return;
         }
@@ -90,10 +100,12 @@ public class pickupObjectController : MonoBehaviour
         if (collision.gameObject.name.Equals("Player") || collision.gameObject.name.Equals("PlayerCopy(Clone)"))
         {
             GetComponent<Rigidbody2D>().mass = 0.001f;
-         //   transform.position = new Vector2(_startPosition.x + 0.1f, _startPosition.y);
+            //   transform.position = new Vector2(_startPosition.x + 0.1f, _startPosition.y);
+
 
             _isPickedUp = true;
             _player = collision.gameObject;
+            transform.rotation = _startRotation;
 
             if (!_isMagnet)
             {
@@ -109,9 +121,15 @@ public class pickupObjectController : MonoBehaviour
         }
     }
 
+    public static bool NextBoolean()
+    {
+        System.Random random = new System.Random();
+        return random.Next() > (Int32.MaxValue / 2);
+    }
+
     public void resetPickup()
     {
-        _isPickedUp=false;
+        _isPickedUp =false;
         _isPlaced=false;
 
         _placedCount = 0;
@@ -125,6 +143,5 @@ public class pickupObjectController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         pickUpObject(collision);
-
     }
 }
