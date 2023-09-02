@@ -167,6 +167,7 @@ public class LoopController : MonoBehaviour
         playerScript.ResetAnimation();
         _playerRigidBody.gravityScale = 1;
 
+        if (_unpaintTilemap != null)
         foreach (var unpaintTile in _unpaintTiles)
         {
             _unpaintTilemap.SetTile(new Vector3Int((int)unpaintTile.x, (int)unpaintTile.y), null);
