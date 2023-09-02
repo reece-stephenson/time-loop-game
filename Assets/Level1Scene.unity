@@ -7069,7 +7069,11 @@ MonoBehaviour:
   buildingAreaLogicController: {fileID: 0}
   _startDelay: 15
   _startPosition: {x: -44.23, y: -5.14}
-  _distanceThreshold: 1
+  _distanceThreshold: 1.5
+  _audioClipLoop: {fileID: 8300000, guid: 4846bad79e17ea6459b08cd123a141d8, type: 3}
+  _audioClipTime: {fileID: 8300000, guid: 71331edd415799f4cba19ab0356aaf33, type: 3}
+  _unpaintTiles: []
+  _unpaintTilemap: {fileID: 0}
 --- !u!82 &1539500323
 AudioSource:
   m_ObjectHideFlags: 0

@@ -3805,6 +3805,8 @@ MonoBehaviour:
   _startDelay: 5
   _startPosition: {x: 3.93, y: -0.26}
   _distanceThreshold: 5
+  _audioClipLoop: {fileID: 8300000, guid: 4846bad79e17ea6459b08cd123a141d8, type: 3}
+  _audioClipTime: {fileID: 8300000, guid: 35e18ba2ec9e70246953604db130552d, type: 3}
   _unpaintTiles: []
   _unpaintTilemap: {fileID: 0}
 --- !u!4 &954105119

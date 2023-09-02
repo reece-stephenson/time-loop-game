@@ -51,6 +51,12 @@ public class LoopController : MonoBehaviour
     private bool _playingLoopImminent = false;
 
     [SerializeField]
+    private AudioClip _audioClipLoop;
+
+    [SerializeField]
+    private AudioClip _audioClipTime;
+
+    [SerializeField]
     private Vector2[] _unpaintTiles;
 
     [SerializeField]
@@ -84,6 +90,7 @@ public class LoopController : MonoBehaviour
         if (elapsedTime >= timeBetweenClones - 5f && !_playingLoopImminent)
         {
             _playingLoopImminent = true;
+            _audioSOurceLoopImminent.clip = _audioClipLoop;
             _audioSOurceLoopImminent.Play();
         }
 
@@ -172,6 +179,10 @@ public class LoopController : MonoBehaviour
         {
             _unpaintTilemap.SetTile(new Vector3Int((int)unpaintTile.x, (int)unpaintTile.y), null);
         }
+
+
+        _audioSOurceLoopImminent.clip = _audioClipTime;
+        _audioSOurceLoopImminent.Play();
 
         elapsedTime = 0f;
 

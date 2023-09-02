@@ -1784,7 +1784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8c33ccd350a294e99027d517711ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _howToPlayPrefab: {fileID: 9008434129606780276, guid: 8c029ecadf2ba1e408c205323dcc59c0, type: 3}
+  _howToPlayPrefab: {fileID: 9008434129606780276, guid: e46b7b927c414ba4da36177283345e3f, type: 3}
   _player: {fileID: 1498503721}
   _levelScene: 2
 --- !u!82 &465215873
@@ -3133,6 +3133,8 @@ MonoBehaviour:
   _startDelay: 8
   _startPosition: {x: -22.34, y: 4.8}
   _distanceThreshold: 5
+  _audioClipLoop: {fileID: 8300000, guid: 4846bad79e17ea6459b08cd123a141d8, type: 3}
+  _audioClipTime: {fileID: 8300000, guid: 42b8bf0bb38e5964f8cdb9f74b416d8c, type: 3}
   _unpaintTiles:
   - {x: -16, y: 0}
   - {x: -16, y: -1}
