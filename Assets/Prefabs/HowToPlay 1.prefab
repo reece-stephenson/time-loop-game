@@ -383,7 +383,9 @@ MonoBehaviour:
 
     Special orbs that reverse gravity in levels. Activate
     them to flip floors and ceilings. Use this to solve various puzzles throughout
-    the level.'
+    the level.
+
+    Gravity boots will keep your past selves in place.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
