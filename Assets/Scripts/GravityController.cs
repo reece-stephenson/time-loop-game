@@ -24,18 +24,18 @@ public class GravityController : MonoBehaviour
         UpdateGravity();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (_audioSource)
-        {
-            _audioSource.Play();
-        }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (_audioSource)
+    //    {
+    //        _audioSource.Play();
+    //    }
 
-        if(_rigidbody)
-        {
-            _rigidbody.gravityScale = 1;
-        }
-    }
+    //    if(_rigidbody)
+    //    {
+    //        _rigidbody.gravityScale = 1;
+    //    }
+    //}
 
     private void UpdateGravity()
     {

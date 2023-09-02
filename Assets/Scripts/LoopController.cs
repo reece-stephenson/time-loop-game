@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class LoopController : MonoBehaviour
 {
@@ -48,6 +49,12 @@ public class LoopController : MonoBehaviour
 
     private AudioSource _audioSOurceLoopImminent;
     private bool _playingLoopImminent = false;
+
+    [SerializeField]
+    private Vector2[] _unpaintTiles;
+
+    [SerializeField]
+    private Tilemap _unpaintTilemap;
 
     void Start()
     {
@@ -116,34 +123,27 @@ public class LoopController : MonoBehaviour
         var newCopy = Instantiate(_playerCopyPrefab, _startPosition, Quaternion.identity);
         var playerCopyScript = newCopy.GetComponent<PlayerCopy>();
         playerCopyScript.DistanceThreshold = _distanceThreshold;
-        Physics2D.IgnoreCollision(_player.GetComponent<Collider2D>(), newCopy.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(_player.GetComponent<CapsuleCollider2D>(), newCopy.GetComponent<CapsuleCollider2D>());
+
+        _player.tag = "Untagged";
 
         foreach (var cp in _copyPlayers)
         {
-            var collider = cp.GetComponent<Collider2D>();
+            var collider = cp.GetComponent<CapsuleCollider2D>();
             var script = cp.GetComponent<PlayerCopy>();
 
-            if(cp.GetComponent<PlayerCopy>().IsDead)
+            cp.tag = "Untagged";
+
+            if (cp.GetComponent<PlayerCopy>().IsDead)
             {
                 cp.GetComponent<PlayerCopy>()._animator.SetInteger("state", (int)MovementState.idle);
             }
 
-            Physics2D.IgnoreCollision(collider, newCopy.GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(collider, newCopy.GetComponent<CapsuleCollider2D>());
             script.ResetMovement(_startPosition);
         }
 
         _copyPlayers.Add(newCopy);
-
-        // // Randomising the colour of the player and clone
-        // Color prevColour = playerScript._spriteRenderer.color;
-        // Color newColour = 
-
-        // while (newColour == prevColour)
-        // {
-        //     newColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        // }
-
-        // playerScript._spriteRenderer.color = newColour;
 
         Color copySpriteColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);;
         copySpriteColour.a = 0.5f;
@@ -166,6 +166,11 @@ public class LoopController : MonoBehaviour
         playerScript.ResetMovement();
         playerScript.ResetAnimation();
         _playerRigidBody.gravityScale = 1;
+
+        foreach (var unpaintTile in _unpaintTiles)
+        {
+            _unpaintTilemap.SetTile(new Vector3Int((int)unpaintTile.x, (int)unpaintTile.y), null);
+        }
 
         elapsedTime = 0f;
 

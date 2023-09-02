@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20996197, g: 0.20996197, b: 0.20996197, a: 1}
+  m_IndirectSpecularColor: {r: 0.49975657, g: 0.49975657, b: 0.49975657, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 208445878}
   - component: {fileID: 208445877}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PauseMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67064d4a0a57ecb44ad7e5a8ffa29ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreStart: {x: 100, y: 70.7}
 --- !u!1 &752136607
 GameObject:
   m_ObjectHideFlags: 0
