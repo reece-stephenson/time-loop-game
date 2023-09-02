@@ -125,12 +125,16 @@ public class LoopController : MonoBehaviour
         playerCopyScript.DistanceThreshold = _distanceThreshold;
         Physics2D.IgnoreCollision(_player.GetComponent<CapsuleCollider2D>(), newCopy.GetComponent<CapsuleCollider2D>());
 
+        _player.tag = "Untagged";
+
         foreach (var cp in _copyPlayers)
         {
             var collider = cp.GetComponent<CapsuleCollider2D>();
             var script = cp.GetComponent<PlayerCopy>();
 
-            if(cp.GetComponent<PlayerCopy>().IsDead)
+            cp.tag = "Untagged";
+
+            if (cp.GetComponent<PlayerCopy>().IsDead)
             {
                 cp.GetComponent<PlayerCopy>()._animator.SetInteger("state", (int)MovementState.idle);
             }
@@ -140,17 +144,6 @@ public class LoopController : MonoBehaviour
         }
 
         _copyPlayers.Add(newCopy);
-
-        // // Randomising the colour of the player and clone
-        // Color prevColour = playerScript._spriteRenderer.color;
-        // Color newColour = 
-
-        // while (newColour == prevColour)
-        // {
-        //     newColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        // }
-
-        // playerScript._spriteRenderer.color = newColour;
 
         Color copySpriteColour = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);;
         copySpriteColour.a = 0.5f;

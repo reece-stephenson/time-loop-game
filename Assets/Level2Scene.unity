@@ -2692,7 +2692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unloadScene: 2
-  _loadScene: 6
+  _loadScene: 3
 --- !u!61 &733414511
 BoxCollider2D:
   m_ObjectHideFlags: 0

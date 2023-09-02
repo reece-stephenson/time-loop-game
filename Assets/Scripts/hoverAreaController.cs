@@ -21,11 +21,9 @@ public class hoverAreaController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("Player") || collision.gameObject.name.Equals("PlayerCopy(Clone)"))
+        if (collision.gameObject.name.Equals("Player"))
         {
-            Vector2 currentPosition = collision.transform.position;
-            currentPosition.y = _hoverAmplitude * Mathf.Cos(Time.time * _hoverSpeed);
-            collision.transform.position = currentPosition;
+            collision.attachedRigidbody.AddForce(Vector2.up * 10f);
         }
     }
 }
