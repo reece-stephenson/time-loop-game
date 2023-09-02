@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class LoopController : MonoBehaviour
 {
@@ -48,6 +49,12 @@ public class LoopController : MonoBehaviour
 
     private AudioSource _audioSOurceLoopImminent;
     private bool _playingLoopImminent = false;
+
+    [SerializeField]
+    private Vector2[] _unpaintTiles;
+
+    [SerializeField]
+    private Tilemap _unpaintTilemap;
 
     void Start()
     {
@@ -166,6 +173,11 @@ public class LoopController : MonoBehaviour
         playerScript.ResetMovement();
         playerScript.ResetAnimation();
         _playerRigidBody.gravityScale = 1;
+
+        foreach (var unpaintTile in _unpaintTiles)
+        {
+            _unpaintTilemap.SetTile(new Vector3Int((int)unpaintTile.x, (int)unpaintTile.y), null);
+        }
 
         elapsedTime = 0f;
 
