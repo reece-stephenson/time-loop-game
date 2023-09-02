@@ -8,9 +8,10 @@ public class LeaderboardController : MonoBehaviour
 {
     private HighscoreItem _scorePrefab;
 
+    [SerializeField]
     private Vector2 _scoreStart = new Vector2(4.615f, 70.7f);
 
-    private float _yIncrement = -50f;
+    private float _yIncrement = -25f;
 
     public static LeaderboardController Instance;
 
