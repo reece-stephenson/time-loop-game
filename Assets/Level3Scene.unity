@@ -283,6 +283,9 @@ MonoBehaviour:
   _positionToBePlaced: {x: 20.3, y: -7.35}
   _isMagnet: 0
   _isMagnetic: 0
+  _tilemap: {fileID: 0}
+  _unpaint: []
+  _paintTile: []
 --- !u!50 &20133948
 Rigidbody2D:
   serializedVersion: 4
@@ -425,6 +428,9 @@ MonoBehaviour:
   _positionToBePlaced: {x: 18.6, y: -7.3}
   _isMagnet: 0
   _isMagnetic: 0
+  _tilemap: {fileID: 0}
+  _unpaint: []
+  _paintTile: []
 --- !u!58 &60521858
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1562,6 +1568,9 @@ MonoBehaviour:
   _positionToBePlaced: {x: 19.6, y: -6.75}
   _isMagnet: 0
   _isMagnetic: 0
+  _tilemap: {fileID: 0}
+  _unpaint: []
+  _paintTile: []
 --- !u!50 &258189041
 Rigidbody2D:
   serializedVersion: 4
@@ -1835,6 +1844,13 @@ MonoBehaviour:
   _positionToBePlaced: {x: 19.5, y: -7.3}
   _isMagnet: 0
   _isMagnetic: 0
+  _tilemap: {fileID: 1710374249}
+  _unpaint:
+  - {x: 24, y: 0}
+  - {x: 24, y: -1}
+  _paintTile:
+  - {fileID: 11400000, guid: b969002f4953b94479d41b98f28ba8d3, type: 2}
+  - {fileID: 11400000, guid: e60745392bbf5d842ab3d38cd2c6531a, type: 2}
 --- !u!50 &386520488
 Rigidbody2D:
   serializedVersion: 4
@@ -2957,6 +2973,9 @@ MonoBehaviour:
   _positionToBePlaced: {x: 19.6, y: -7.85}
   _isMagnet: 0
   _isMagnetic: 0
+  _tilemap: {fileID: 0}
+  _unpaint: []
+  _paintTile: []
 --- !u!50 &668298463
 Rigidbody2D:
   serializedVersion: 4
@@ -7724,7 +7743,27 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 24, y: -1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 4
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 3
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 0, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 3
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 24, y: 0, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 3
@@ -7742,9 +7781,9 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: b969002f4953b94479d41b98f28ba8d3, type: 2}
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: e60745392bbf5d842ab3d38cd2c6531a, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -7753,9 +7792,9 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: b3072c067b29f2b4f8bae3178e4de082, type: 3}
-  - m_RefCount: 1
+  - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 55afc7ad0c2ad4b4c952572881a88332, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 0
@@ -7812,7 +7851,7 @@ Tilemap:
       e31: 5.97e-43
       e32: 5.94e-43
       e33: 5.94e-43
-  - m_RefCount: 2
+  - m_RefCount: 4
     m_Data:
       e00: 1
       e01: 0
@@ -7831,7 +7870,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 2
+  - m_RefCount: 4
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1

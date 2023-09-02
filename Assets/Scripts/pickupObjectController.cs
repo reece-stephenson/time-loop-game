@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using static UnityEditor.PlayerSettings;
 
 public class pickupObjectController : MonoBehaviour
 {
@@ -17,11 +19,22 @@ public class pickupObjectController : MonoBehaviour
     private bool _isPlaced { get; set; }
     private bool _isPickedUp { get; set; }
 
+    private static int _placedCount = 0;
+
     [SerializeField]
     private bool _isMagnet = false;
 
     [SerializeField]
     private bool _isMagnetic = false;
+
+    [SerializeField]
+    private Tilemap _tilemap;
+
+    [SerializeField]
+    private Vector2[] _unpaint;
+
+    [SerializeField]
+    private Tile[] _paintTile;
 
     void Start()
     {
@@ -41,22 +54,30 @@ public class pickupObjectController : MonoBehaviour
 
         if (_dist < 1.9)
         {
+            if (!_isPlaced)
+                _placedCount++;
+
             transform.position = _positionToBePlaced;
             _isPlaced = true;
             _player.gameObject.tag = "Untagged";
 
+            if (_placedCount == 5 && _tilemap != null)
+            {
+                Debug.Log("Finished building");
+                foreach (var pos in _unpaint)
+                {
+                    _tilemap.SetTile(new Vector3Int((int)pos.x, (int)pos.y), null);
+                }
+            }
+
             return;
         }
 
-        if (_isPickedUp)
+        if (_isPickedUp && !_isPlaced)
         {
             Vector3 _playerPos = _player.transform.position;
             transform.position = new Vector2(_playerPos.x, _playerPos.y - 0.1f);
         }
-
-        
-
-
     }
 
     public void pickUpObject(Collider2D collision)
@@ -97,7 +118,12 @@ public class pickupObjectController : MonoBehaviour
         _isPickedUp=false;
         _isPlaced=false;
 
+        _placedCount = 0;
         transform.position = _startPosition;
+
+        if (_tilemap == null) return;
+        _tilemap.SetTile(new Vector3Int((int)_unpaint[0].x, (int)_unpaint[0].y), _paintTile[0]);
+        _tilemap.SetTile(new Vector3Int((int)_unpaint[1].x, (int)_unpaint[1].y), _paintTile[1]);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
