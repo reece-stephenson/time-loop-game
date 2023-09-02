@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -36,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerAudioPlayer _playerAudioPlayer;
 
+    public static bool IsMobile { get; set; } = true;
+
     void Start()
     {
         _playerAudioPlayer = GetComponent<PlayerAudioPlayer>();
@@ -56,47 +59,95 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (_rigidBody.gravityScale != 1)
-        {
-            isGravityFlipped = true;
-            transform.eulerAngles = transform.eulerAngles = new Vector3(0, 0, 180f);
-            movementDirection = -Input.GetAxisRaw("Horizontal");
-        }
-        else
-        {
-            isGravityFlipped = false;
-            transform.eulerAngles = Vector3.zero;
-            movementDirection = Input.GetAxisRaw("Horizontal");
-        }
-
-        if (IsDead)
-        {
-            // Debug.Log("Not moving B");
-            movementDirection = 0f;
-            UpdateAnimationState();
-            _movements.Enqueue(new MovementPair
-            {
-                Position = _rigidBody.position,
-                HasReceivedInput = false
-            });
-            return;
-        }
-
         var yVelocity = _rigidBody.velocity.y;
 
-        if (Input.GetKey("space") && IsGrounded())
+        if (!IsMobile)
         {
-
-            _playerAudioPlayer.PlayJumpSound();
-            if (!isGravityFlipped)
+            if (_rigidBody.gravityScale != 1)
             {
-                yVelocity = _jumpHeight;
+                isGravityFlipped = true;
+                transform.eulerAngles = transform.eulerAngles = new Vector3(0, 0, 180f);
+                movementDirection = -Input.GetAxisRaw("Horizontal");
             }
             else
             {
-                yVelocity = -_jumpHeight;
+                isGravityFlipped = false;
+                transform.eulerAngles = Vector3.zero;
+                movementDirection = Input.GetAxisRaw("Horizontal");
+            }
+
+            if (IsDead)
+            {
+                // Debug.Log("Not moving B");
+                movementDirection = 0f;
+                UpdateAnimationState();
+                _movements.Enqueue(new MovementPair
+                {
+                    Position = _rigidBody.position,
+                    HasReceivedInput = false
+                });
+                return;
+            }
+
+            if (Input.GetKey("space") && IsGrounded())
+            {
+
+                _playerAudioPlayer.PlayJumpSound();
+                if (!isGravityFlipped)
+                {
+                    yVelocity = _jumpHeight;
+                }
+                else
+                {
+                    yVelocity = -_jumpHeight;
+                }
             }
         }
+        else
+        {
+
+            if (_rigidBody.gravityScale != 1)
+            {
+                isGravityFlipped = true;
+                transform.eulerAngles = transform.eulerAngles = new Vector3(0, 0, 180f);
+                movementDirection = -ButtonInput.Direction;
+            }
+            else
+            {
+                isGravityFlipped = false;
+                transform.eulerAngles = Vector3.zero;
+                movementDirection = ButtonInput.Direction;
+            }
+
+            if (ButtonInput.Jump == 1 && IsGrounded())
+            {
+
+                _playerAudioPlayer.PlayJumpSound();
+                if (!isGravityFlipped)
+                {
+                    yVelocity = _jumpHeight;
+                }
+                else
+                {
+                    yVelocity = -_jumpHeight;
+                }
+            }
+
+            if (IsDead)
+            {
+                // Debug.Log("Not moving B");
+                movementDirection = 0f;
+                UpdateAnimationState();
+                _movements.Enqueue(new MovementPair
+                {
+                    Position = _rigidBody.position,
+                    HasReceivedInput = false
+                });
+                return;
+            }
+        }
+        
+        
 
         UpdateAnimationState();
 
