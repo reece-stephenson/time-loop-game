@@ -116,11 +116,11 @@ public class LoopController : MonoBehaviour
         var newCopy = Instantiate(_playerCopyPrefab, _startPosition, Quaternion.identity);
         var playerCopyScript = newCopy.GetComponent<PlayerCopy>();
         playerCopyScript.DistanceThreshold = _distanceThreshold;
-        Physics2D.IgnoreCollision(_player.GetComponent<Collider2D>(), newCopy.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(_player.GetComponent<CapsuleCollider2D>(), newCopy.GetComponent<CapsuleCollider2D>());
 
         foreach (var cp in _copyPlayers)
         {
-            var collider = cp.GetComponent<Collider2D>();
+            var collider = cp.GetComponent<CapsuleCollider2D>();
             var script = cp.GetComponent<PlayerCopy>();
 
             if(cp.GetComponent<PlayerCopy>().IsDead)
@@ -128,7 +128,7 @@ public class LoopController : MonoBehaviour
                 cp.GetComponent<PlayerCopy>()._animator.SetInteger("state", (int)MovementState.idle);
             }
 
-            Physics2D.IgnoreCollision(collider, newCopy.GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(collider, newCopy.GetComponent<CapsuleCollider2D>());
             script.ResetMovement(_startPosition);
         }
 
