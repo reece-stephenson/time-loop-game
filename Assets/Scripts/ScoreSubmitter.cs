@@ -11,9 +11,14 @@ public class ScoreSubmitter : MonoBehaviour
 
     [SerializeField]
     private TMP_Text _score;
+
+    private AudioSource _audioSource;
+
     void Start()
     {
         _score.text += LoopController.CloneCount;
+        _audioSource = GetComponent<AudioSource>();
+        Time.timeScale = 0;
     }
 
     public void Submit()
@@ -49,6 +54,9 @@ public class ScoreSubmitter : MonoBehaviour
                 Debug.Log(response.Error);
             }
         });
+
+        Time.timeScale = 1f;
+        _audioSource.Play();
 
         Destroy(GameObject.Find("Canvas"));
     }

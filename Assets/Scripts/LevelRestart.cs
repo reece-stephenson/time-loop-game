@@ -12,7 +12,7 @@ public class LevelRestart : MonoBehaviour
 
     private void OnGUI()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) && !IsPaused)
+        if (Input.GetKeyUp(KeyCode.Tab) && !IsPaused)
         {
             Time.timeScale = 0f;
             AudioListener.pause = true;
