@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsDead { get; set; }
 
-    private BoxCollider2D _boxCollider;
+    private CapsuleCollider2D _capsuleCollider;
 
     private float movementDirection = 0f;
 
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _movements = new Queue<MovementPair>();
         _animations = new Queue<CommonAnimationState>();
-        _boxCollider = GetComponent<BoxCollider2D>();
+        _capsuleCollider = GetComponent<CapsuleCollider2D>();
         _movementState = new MovementState();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -179,15 +179,19 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (!isGravityFlipped)
-        {
-            return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.down, .1f, _jumpableGround);
-        }
-        else
-        {
-            return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.up, .1f, _jumpableGround);
-        }
+        float castDistance = 0.1f;
+        Vector2 castDirection = !isGravityFlipped ? Vector2.down : Vector2.up;
+
+        Vector2 capsuleCenter = _capsuleCollider.bounds.center;
+        float capsuleHeight = _capsuleCollider.bounds.size.y;
+        float capsuleRadius = _capsuleCollider.size.x / 2f;
+
+        RaycastHit2D hit = Physics2D.CapsuleCast(capsuleCenter, new Vector2(capsuleRadius * 2, capsuleHeight), CapsuleDirection2D.Vertical, 0f, castDirection, castDistance, _jumpableGround);
+
+        return hit.collider != null;
     }
+
+
 
     public void ResetMovement()
     {

@@ -121,7 +121,7 @@ public class TrapController : MonoBehaviour
         return trapPositions.ToArray();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
         Debug.Log(_tilemap.WorldToCell(collision.transform.position));
 
