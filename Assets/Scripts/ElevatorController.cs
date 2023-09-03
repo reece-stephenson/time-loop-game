@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class ElevatorController : MonoBehaviour
 {
@@ -31,11 +32,14 @@ public class ElevatorController : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
+    private Light2D _light;
+
     void Start()
     {
         _target = _startPosition;
         _audioSource = GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _light = GetComponent<Light2D>();
     }
 
     void Update()
@@ -49,7 +53,10 @@ public class ElevatorController : MonoBehaviour
         _target = _endPosition;
 
         if (_btnOnSprite != null)
+        {
             _spriteRenderer.sprite = _btnOnSprite;
+            _light.enabled = true;
+        }
     }
 
     public void Deactivate()
@@ -58,7 +65,10 @@ public class ElevatorController : MonoBehaviour
         _target = _startPosition;
 
         if (_btnOffSprite != null)
+        {
             _spriteRenderer.sprite = _btnOffSprite;
+            _light.enabled = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
