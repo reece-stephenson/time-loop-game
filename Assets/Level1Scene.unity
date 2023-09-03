@@ -826,8 +826,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.2828999, y: 0.11224997, z: 0}
-    m_Extent: {x: 4.5649, y: 2.45195, z: 0}
+    m_Center: {x: -1.29225, y: 0.11080003, z: 0}
+    m_Extent: {x: 4.55995, y: 2.4486, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -12343,8 +12343,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.018150032, y: 0.04019998, z: 0}
-    m_Extent: {x: 1.1479499, y: 0.49699998, z: 0}
+    m_Center: {x: 0.0013499856, y: 0.027600005, z: 0}
+    m_Extent: {x: 1.14815, y: 0.5005, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -15244,8 +15244,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.118149996, y: -0.24570003, z: 0}
-    m_Extent: {x: 0.82265, y: 0.78110003, z: 0}
+    m_Center: {x: 0.11289999, y: -0.25715002, z: 0}
+    m_Extent: {x: 0.81710005, y: 0.78395, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -17445,6 +17445,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2420625350573398142, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 43721d83635e30541bc34778c18dd605, type: 2}
     - target: {fileID: 3022806096057450047, guid: 89a27a6c4fdd07548887b2b683df9b32, type: 3}
       propertyPath: m_Camera
       value: 
