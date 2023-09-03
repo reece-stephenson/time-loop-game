@@ -56,7 +56,7 @@ public class PlayerCopy : MonoBehaviour
         UpdateAnimationState(animationState);
 
         if (((MovementPair)_enumerator.Current).HasReceivedInput)
-            transform.position = Vector2.MoveTowards(_rigidBody.position, ((MovementPair)_enumerator.Current).Position, 4F);
+            transform.position = Vector2.MoveTowards(_rigidBody.position, ((MovementPair)_enumerator.Current).Position, 100f);
 
         _resetDistance = false;
     }
