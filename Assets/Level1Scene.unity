@@ -826,8 +826,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.2804999, y: 0.118800044, z: 0}
-    m_Extent: {x: 4.5576, y: 2.4492002, z: 0}
+    m_Center: {x: -1.2828999, y: 0.11224997, z: 0}
+    m_Extent: {x: 4.5649, y: 2.45195, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3497,7 +3497,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1580884781
   m_SortingLayer: 5
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d89cf68ab464f534ea8b17fa68f51e17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12343,8 +12343,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.011350036, y: 0.033350006, z: 0}
-    m_Extent: {x: 1.14915, y: 0.50775003, z: 0}
+    m_Center: {x: 0.018150032, y: 0.04019998, z: 0}
+    m_Extent: {x: 1.1479499, y: 0.49699998, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -12451,6 +12451,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 531214086281460468, guid: db56aaad2b5ca9f4485c213d3db1384b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1625793609}
     - target: {fileID: 995562782646310853, guid: db56aaad2b5ca9f4485c213d3db1384b, type: 3}
       propertyPath: m_Name
       value: HelpHint (1)
@@ -15240,8 +15244,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.1207, y: -0.24740002, z: 0}
-    m_Extent: {x: 0.8214, y: 0.7908, z: 0}
+    m_Center: {x: 0.118149996, y: -0.24570003, z: 0}
+    m_Extent: {x: 0.82265, y: 0.78110003, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
