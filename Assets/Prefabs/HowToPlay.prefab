@@ -652,8 +652,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\rButtons:\r\nActivate buttons to manipulate elements like doors and elevators.
-    Use the time loop to deactivate and reactivate buttons, allowing you to solve
-    challenges by repeating actions.\n"
+    Buttons can be activated and deactivated or pressed multiple times by you and
+    your copies to produce different results."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
