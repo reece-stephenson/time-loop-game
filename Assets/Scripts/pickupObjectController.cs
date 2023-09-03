@@ -35,8 +35,13 @@ public class pickupObjectController : MonoBehaviour
 
     private Quaternion _startRotation;
 
+    private static AudioSource _audioSource;
+
     void Start()
     {
+        if (_audioSource == null)
+            _audioSource = GetComponent<AudioSource>();
+
         _startPosition = transform.position;
         _startRotation = transform.rotation;
 
@@ -56,7 +61,12 @@ public class pickupObjectController : MonoBehaviour
         if (_dist < 1.9)
         {
             if (!_isPlaced)
+            {
                 _placedCount++;
+                if (_audioSource != null && _placedCount == 5)
+                    _audioSource.Play();
+            }
+
             
             transform.rotation = _startRotation;
 
@@ -71,6 +81,7 @@ public class pickupObjectController : MonoBehaviour
                 {
                     _tilemap.SetTile(new Vector3Int((int)pos.x, (int)pos.y), null);
                 }
+
             }
 
             return;
