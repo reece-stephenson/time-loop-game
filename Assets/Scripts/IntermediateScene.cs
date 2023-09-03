@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,9 @@ public class IntermediateScene : MonoBehaviour
 {
     [SerializeField]
     private float _duration = 3f;
+
+    [SerializeField]
+    private TMP_Text _text;
 
     private float _current = 0f;
 
@@ -21,12 +25,10 @@ public class IntermediateScene : MonoBehaviour
     {
         _current += Time.deltaTime;
 
-        //if (_current >= _duration)
-        //{
-        //    SceneManager.LoadScene(1);
-        //    SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
-        //    SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
-        //}
+        if (_current >= _duration)
+        {
+            _text.text = "Click to continue...";
+        }
     }
 
     private void OnGUI()
@@ -34,7 +36,6 @@ public class IntermediateScene : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && _current >= _duration)
         {
             SceneManager.LoadScene((int)Scenes.MAIN_MENU);
-            //SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);
             SceneManager.LoadScene((int)Scenes.DEV_SCENE, LoadSceneMode.Additive);
         }
     }
