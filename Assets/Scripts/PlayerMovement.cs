@@ -23,7 +23,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float _jumpHeight = 5f;
 
-    public bool LockMovement { get; set; } = false;
+    [SerializeField]
+    private PhysicsMaterial2D _physicsMaterialSlide;
+
+    [SerializeField]
+    private PhysicsMaterial2D _physicsMaterialNoSlide;
+
+    private bool _lockMovement;
+    public bool LockMovement
+    {
+        get => _lockMovement;
+        set
+        {
+            _lockMovement = value;
+            _capsuleCollider.sharedMaterial = (value) ? _physicsMaterialNoSlide : _physicsMaterialSlide;
+        }
+    }
 
     public Queue<MovementPair> _movements { get; set; }
     public Queue<CommonAnimationState> _animations { get; set; }
