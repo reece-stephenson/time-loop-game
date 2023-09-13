@@ -8,9 +8,11 @@ public class MainMenuActions : MonoBehaviour
 
     public static bool PlayButtonIsEnabled { get; set; }
 
+    public static bool HasClickedPlay { get; set; }
+
     public void PlayButtonClick()
     {
-        if (!PlayButtonIsEnabled) return;
+        HasClickedPlay = true;
 
         SceneManager.LoadScene((int)Scenes.LEVEL1);
         SceneManager.LoadScene((int)Scenes.SHIP_SCENE, LoadSceneMode.Additive);

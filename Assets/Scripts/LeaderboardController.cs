@@ -19,8 +19,7 @@ public class LeaderboardController : MonoBehaviour
 
     void Start()
     {
-        MainMenuActions.PlayButtonIsEnabled = false;
-
+        MainMenuActions.HasClickedPlay = false;
         if (Instance == null)
         {
             Instance = this;
@@ -95,25 +94,33 @@ public class LeaderboardController : MonoBehaviour
 
         LootLockerSDKManager.GetScoreList(lKey, count, (response) =>
         {
-            if (response.success )
+            if (response.success && !MainMenuActions.HasClickedPlay)
             {
                 var targetVector = _scoreStart;
 
+                if (MainMenuActions.HasClickedPlay)
+                    return;
+
                 foreach (var item in response.items)
                 {
-                    var score = Instantiate(_scorePrefab, targetVector, Quaternion.identity);
+                    if (MainMenuActions.HasClickedPlay)
+                        return;
 
-                    score.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+                    try
+                    {
+                        var score = Instantiate(_scorePrefab, targetVector, Quaternion.identity);
 
-                    var scoreScript = score.GetComponent<HighscoreItem>();
+                        score.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
 
-                    scoreScript.Rank = item.rank.ToString();
-                    scoreScript.Name = item.member_id;
-                    scoreScript.Score = item.score.ToString();
+                        var scoreScript = score.GetComponent<HighscoreItem>();
 
-                    targetVector = new Vector2(targetVector.x, targetVector.y + _yIncrement);
+                        scoreScript.Rank = item.rank.ToString();
+                        scoreScript.Name = item.member_id;
+                        scoreScript.Score = item.score.ToString();
 
-                    MainMenuActions.PlayButtonIsEnabled = true;
+                        targetVector = new Vector2(targetVector.x, targetVector.y + _yIncrement);
+                    }
+                    catch { }
                 }
             }
             else
