@@ -37,7 +37,7 @@ public class Level1SceneStart : MonoBehaviour
 
     private void OnGUI()
     {
-        if (Input.GetKeyDown(KeyCode.H) && _player.GetComponent<PlayerMovement>().LockMovement == false && !HowToPlay.LockInstantiation)
+        if (Input.GetKeyDown(KeyCode.H) && _player.GetComponent<PlayerMovement>().LockMovement == false && !HowToPlay.LockInstantiation && !HowToPlay.LockPopup)
         {
             Debug.Log("Created help");
             HowToPlay.LockInstantiation = true;

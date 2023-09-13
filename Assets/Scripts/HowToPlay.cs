@@ -6,6 +6,8 @@ public class HowToPlay : MonoBehaviour
 {
     public static bool LockInstantiation { get; set; }
 
+    public static bool LockPopup { get; set; } = false;
+
     private void Start()
     {
         Time.timeScale = 0f;
@@ -14,9 +16,9 @@ public class HowToPlay : MonoBehaviour
 
     private void OnGUI()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !LockPopup)
         {
-            Debug.Log("Closing help");
+            Debug.Log("Closing help: " + LockPopup);
             Time.timeScale = 1f;
             Destroy(gameObject);
             LockInstantiation = false;

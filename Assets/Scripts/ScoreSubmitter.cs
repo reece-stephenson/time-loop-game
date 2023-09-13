@@ -19,6 +19,7 @@ public class ScoreSubmitter : MonoBehaviour
         _score.text += LoopController.CloneCount;
         _audioSource = GetComponent<AudioSource>();
         Time.timeScale = 0;
+        HowToPlay.LockPopup = true;
     }
 
     public void Submit()
@@ -57,6 +58,7 @@ public class ScoreSubmitter : MonoBehaviour
 
         Time.timeScale = 1f;
         _audioSource.Play();
+        HowToPlay.LockPopup = false;
 
         Destroy(GameObject.Find("Canvas"));
     }
